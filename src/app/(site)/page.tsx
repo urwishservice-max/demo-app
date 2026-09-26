@@ -1,248 +1,262 @@
 import Link from "next/link"
-import { Button } from "@/components/ui/button"
+import { ArrowUpRight, ArrowRight, ShieldCheck, CheckCircle2 } from "lucide-react"
+import { HeroSection } from "@/components/home/hero-section"
+import { LogoSlider } from "@/components/home/logo-slider"
+import { PracticeTabs } from "@/components/home/practice-tabs"
+import { WhatDrivesUs } from "@/components/home/what-drives-us"
+import { SectorDial } from "@/components/home/sector-dial"
+import { FaqAccordion } from "@/components/home/faq-accordion"
+import { ConsultationForm } from "@/components/home/consultation-form"
+
+const industries = [
+  {
+    name: "Aviation & Aerospace",
+    href: "/industries",
+    image: "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=800&q=80",
+  },
+  {
+    name: "Banking & Financial Services",
+    href: "/industries",
+    image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=800&q=80",
+  },
+  {
+    name: "Healthcare & Life Sciences",
+    href: "/industries",
+    image: "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=800&q=80",
+  },
+  {
+    name: "Real Estate & Infrastructure",
+    href: "/industries",
+    image: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&q=80",
+  },
+  {
+    name: "Supply Chain & Logistics",
+    href: "/industries",
+    image: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=800&q=80",
+  },
+]
 
 export default function Home() {
   return (
-    <div className="flex flex-col">
-      {/* 1. HERO */}
-      <section className="relative bg-navy-900 text-white min-h-[85vh] flex items-center pt-10">
-        <div className="absolute inset-0 overflow-hidden opacity-20 pointer-events-none">
-          {/* Abstract structure/data pattern (placeholder CSS representation) */}
-          <div className="absolute top-0 right-0 w-full h-full bg-[linear-gradient(to_right,#5A6B7C_1px,transparent_1px),linear-gradient(to_bottom,#5A6B7C_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_60%_at_70%_50%,#000_10%,transparent_100%)]" />
-        </div>
-        
-        <div className="container mx-auto px-6 max-w-7xl relative z-10">
-          <div className="max-w-4xl">
-            <h1 className="text-4xl md:text-5xl lg:text-7xl font-semibold leading-tight tracking-tight mb-8">
-              From strategy to implementation — built for the UAE, designed to endure.
-            </h1>
-            <p className="text-lg md:text-2xl text-slate-200 font-light max-w-2xl leading-relaxed mb-10">
-              Asheron helps organisations turn strategic, regulatory, and technology priorities into governed, measurable outcomes.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4">
-              <Button asChild size="lg">
-                <Link href="/contact">Request a Consultation</Link>
-              </Button>
-              <Button asChild variant="outline" size="lg" className="border-white/30 text-white hover:bg-white hover:text-navy-900 bg-transparent">
-                <Link href="/services">Explore Our Practices</Link>
-              </Button>
-            </div>
-          </div>
-        </div>
-      </section>
+    <div className="bg-[#202020] text-white">
+      
+      {/* ============== HERO SECTION (ACHERON Minimal Luxury Animated Canvas) ============== */}
+      <HeroSection />
 
-      {/* 2. CREDIBILITY STRIP */}
-      <section className="bg-slate-50 border-b border-slate-200 py-6">
-        <div className="container mx-auto px-6 max-w-7xl">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-slate-600 font-medium text-center md:text-left">
-            <span>Dubai, United Arab Emirates</span>
-            <span className="hidden md:inline text-gold-300">&middot;</span>
-            <span>Four licensed advisory practices</span>
-            <span className="hidden md:inline text-gold-300">&middot;</span>
-            <span>Regulated-sector experience</span>
-            <span className="hidden md:inline text-gold-300">&middot;</span>
-            <span>Practical, regulator-ready delivery</span>
-          </div>
-        </div>
-      </section>
+      {/* Marquee Sector Slider */}
+      <div className="border-t border-[#E7E7E3]">
+        <LogoSlider />
+      </div>
 
-      {/* 3. HOME POSITIONING */}
-      <section className="py-24 md:py-32 bg-white">
-        <div className="container mx-auto px-6 max-w-7xl">
-          <div className="max-w-4xl">
-            <h2 className="text-3xl md:text-5xl font-semibold mb-8 text-navy-900 leading-tight">
-              Advisory that survives contact with reality.
+      {/* ============== WHAT GOT YOU HERE (Matching Phos Framed Statement Band) ============== */}
+      <section id="what-got-you-here" className="section--light sframe sframe--rails sframe--rule-top sframe--rule-bottom py-20 md:py-28 bg-[#FAFAF8] text-[#202020]">
+        <div className="wrap">
+          <div className="max-w-4xl mx-auto text-center">
+            <h2 className="t-title font-medium tracking-tight text-[#202020] mb-6">
+              What got you here <em className="!text-[#CAC32C]">won’t take you into the future.</em>
             </h2>
-            <p className="text-xl md:text-2xl text-slate-500 leading-relaxed font-light">
-              Strategy documents, technology pilots, and training programmes often stall at the point of execution. Asheron works at that point. We combine strategic design with governance, capability, and delivery discipline so that decisions taken at board level become operational practice — with clear ownership, controls, and evidence.
+            <p className="t-lead text-[#6B6B6B] max-w-2xl mx-auto mb-10 text-base md:text-lg">
+              Strategy documents, technology pilots, and isolated AI experiments routinely stall at the point of operational execution. Acheron works at that critical inflection point: connecting executive intent with governed, accountable delivery.
             </p>
-          </div>
-        </div>
-      </section>
-
-      {/* 4. FOUR PRACTICES */}
-      <section className="py-24 bg-off-white">
-        <div className="container mx-auto px-6 max-w-7xl">
-          <div className="mb-16 max-w-3xl">
-            <h2 className="text-3xl md:text-4xl font-semibold mb-6">Four practices, matched to our four licences.</h2>
-            <p className="text-lg text-slate-600">
-              Engage each practice independently — or combine them in sequence to move from strategic intent to sustainable operational delivery.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            {/* Practice 1 */}
-            <Link href="/services/ai-innovation" className="group flex flex-col bg-white p-10 border border-slate-200 rounded-sm hover:shadow-xl hover:border-gold-300/50 transition-all duration-300 ease-brand hover:-translate-y-1 h-full relative overflow-hidden">
-              <div className="absolute top-0 left-0 w-full h-1 bg-transparent group-hover:bg-gold-500 transition-colors" />
-              <div className="text-xs font-semibold tracking-wider text-gold-500 uppercase mb-4">7020039</div>
-              <h3 className="text-2xl font-semibold mb-4 text-navy-900 group-hover:text-gold-500 transition-colors">AI & Innovation</h3>
-              <p className="text-slate-600 leading-relaxed mb-8 flex-1">
-                AI opportunity discovery, readiness diagnostics, responsible AI governance, workflow design, model and vendor assessment, and implementation assurance.
-              </p>
-              <div className="text-sm font-semibold text-navy-900 flex items-center gap-2 group-hover:gap-3 transition-all">
-                Explore practice <span>&rarr;</span>
-              </div>
-            </Link>
-
-            {/* Practice 2 */}
-            <Link href="/services/strategy" className="group flex flex-col bg-white p-10 border border-slate-200 rounded-sm hover:shadow-xl hover:border-gold-300/50 transition-all duration-300 ease-brand hover:-translate-y-1 h-full relative overflow-hidden">
-              <div className="absolute top-0 left-0 w-full h-1 bg-transparent group-hover:bg-gold-500 transition-colors" />
-              <div className="text-xs font-semibold tracking-wider text-gold-500 uppercase mb-4">7020003</div>
-              <h3 className="text-2xl font-semibold mb-4 text-navy-900 group-hover:text-gold-500 transition-colors">Strategy & Management</h3>
-              <p className="text-slate-600 leading-relaxed mb-8 flex-1">
-                Operating-model design, strategic planning, process re-engineering, transformation roadmaps, KPI architecture, governance enhancement, and board advisory.
-              </p>
-              <div className="text-sm font-semibold text-navy-900 flex items-center gap-2 group-hover:gap-3 transition-all">
-                Explore practice <span>&rarr;</span>
-              </div>
-            </Link>
-
-            {/* Practice 3 */}
-            <Link href="/services/people" className="group flex flex-col bg-white p-10 border border-slate-200 rounded-sm hover:shadow-xl hover:border-gold-300/50 transition-all duration-300 ease-brand hover:-translate-y-1 h-full relative overflow-hidden">
-              <div className="absolute top-0 left-0 w-full h-1 bg-transparent group-hover:bg-gold-500 transition-colors" />
-              <div className="text-xs font-semibold tracking-wider text-gold-500 uppercase mb-4">7020008</div>
-              <h3 className="text-2xl font-semibold mb-4 text-navy-900 group-hover:text-gold-500 transition-colors">People & Capability</h3>
-              <p className="text-slate-600 leading-relaxed mb-8 flex-1">
-                Workforce impact assessment, organisation design, capability frameworks, AI fluency programmes, leadership development, and change management.
-              </p>
-              <div className="text-sm font-semibold text-navy-900 flex items-center gap-2 group-hover:gap-3 transition-all">
-                Explore practice <span>&rarr;</span>
-              </div>
-            </Link>
-
-            {/* Practice 4 */}
-            <Link href="/services/projects" className="group flex flex-col bg-white p-10 border border-slate-200 rounded-sm hover:shadow-xl hover:border-gold-300/50 transition-all duration-300 ease-brand hover:-translate-y-1 h-full relative overflow-hidden">
-              <div className="absolute top-0 left-0 w-full h-1 bg-transparent group-hover:bg-gold-500 transition-colors" />
-              <div className="text-xs font-semibold tracking-wider text-gold-500 uppercase mb-4">7020020</div>
-              <h3 className="text-2xl font-semibold mb-4 text-navy-900 group-hover:text-gold-500 transition-colors">Project Development</h3>
-              <p className="text-slate-600 leading-relaxed mb-8 flex-1">
-                Business cases, PMO design, programme mobilisation, stage-gate governance, vendor selection, project assurance, and programme recovery.
-              </p>
-              <div className="text-sm font-semibold text-navy-900 flex items-center gap-2 group-hover:gap-3 transition-all">
-                Explore practice <span>&rarr;</span>
-              </div>
+            <Link href="#contact" className="btn btn--dark !py-3.5 !px-8">
+              Start now
             </Link>
           </div>
         </div>
       </section>
 
-      {/* 5. HOW WE WORK */}
-      <section className="py-24 bg-white overflow-hidden">
-        <div className="container mx-auto px-6 max-w-7xl">
-          <h2 className="text-3xl md:text-4xl font-semibold mb-16">How we work.</h2>
-          
-          <div className="relative">
-            <div className="hidden md:block absolute top-6 left-0 w-full h-px bg-gold-300/30" />
-            <div className="md:hidden absolute left-6 top-0 h-full w-px bg-gold-300/30" />
-            
-            <div className="flex flex-col md:flex-row gap-12 md:gap-6 lg:gap-12 relative z-10">
-              {[
-                { num: "01", title: "Assess", desc: "Understand how work is actually performed, where value and risk sit, and what the operating environment allows." },
-                { num: "02", title: "Prioritise", desc: "Rank opportunities by strategic value, feasibility, control requirements, and expected benefit." },
-                { num: "03", title: "Design", desc: "Define the target operating model, governance, controls, and roles required to deliver it." },
-                { num: "04", title: "Enable", desc: "Equip leadership and teams with the skills, guidance, and playbooks to run the new way of working." },
-                { num: "05", title: "Assure", desc: "Support controlled rollout, validate safeguards, monitor outcomes, and refine." },
-              ].map((step) => (
-                <div key={step.num} className="flex-1 flex flex-row md:flex-col gap-6 md:gap-8">
-                  <div className="flex-shrink-0 w-12 h-12 rounded-full bg-white border border-gold-300 text-gold-500 flex items-center justify-center font-semibold text-lg relative z-10">
-                    {step.num}
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-semibold mb-3">{step.title}</h3>
-                    <p className="text-sm text-slate-600 leading-relaxed">{step.desc}</p>
-                  </div>
+      {/* ============== FOUR PRACTICES (The Acheron Standard) ============== */}
+      <section id="phases" className="section--light sframe sframe--rails py-20 md:py-28 bg-[#FAFAF8] text-[#202020]">
+        <div className="wrap">
+          <PracticeTabs />
+        </div>
+      </section>
+
+      {/* ============== WHAT DRIVES US (Built for a higher standard) ============== */}
+      <section className="section--light sframe sframe--rails sframe--rule-top sframe--rule-bottom py-14 md:py-18 bg-[#FAFAF8] text-[#202020]">
+        <div className="wrap">
+          <WhatDrivesUs />
+        </div>
+      </section>
+
+      {/* ============== SECTOR EXPERTISE (Automatic Left-Moving Slider) ============== */}
+      <section id="industries" className="py-8 md:py-10 bg-[#FAFAF8] text-[#202020]">
+        <div className="wrap">
+          <SectorDial />
+        </div>
+      </section>
+
+      {/* ============== LICENSED ADVISORY ACTIVITIES (Professional & Borderless) ============== */}
+      <section className="py-14 md:py-16 bg-[#FAFAF8] text-[#202020]">
+        <div className="wrap">
+          {/* Institutional Top Bar */}
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-6 border-b border-[#E7E7E3] mb-8">
+            <div className="flex items-center gap-3">
+              <span className="h-2 w-2 rounded-full bg-[#CAC32C]" />
+              <span className="text-[11px] font-bold uppercase tracking-[0.24em] text-[#1A1A1A]">
+                Licensed Advisory Activities
+              </span>
+              <span className="text-xs text-[#8A8A85] hidden sm:inline">
+                · Department of Economy and Tourism
+              </span>
+            </div>
+            <span className="text-[11px] font-mono font-semibold uppercase tracking-wider text-[#70706C]">
+              Government of Dubai · UAE
+            </span>
+          </div>
+
+          {/* 4 Professional Editorial Columns (No Chunky Box Boundaries) */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-10">
+            {/* 01 */}
+            <div className="flex flex-col justify-between group">
+              <div>
+                <div className="flex items-center gap-2 mb-2">
+                  <span className="text-[11px] font-mono font-semibold text-[#8A8A85] uppercase tracking-wider">
+                    Licence
+                  </span>
+                  <span className="text-xs font-mono font-bold text-[#1A1A1A]">
+                    7020039
+                  </span>
                 </div>
-              ))}
+                <h4 className="text-base sm:text-lg font-bold text-[#1A1A1A] tracking-tight group-hover:text-[#CAC32C] transition-colors mb-2">
+                  AI & Innovation
+                </h4>
+                <p className="text-xs sm:text-[13px] text-[#6B6B6B] leading-relaxed">
+                  Autonomous systems, algorithmic verification, and governed executive architecture.
+                </p>
+              </div>
+              <div className="mt-4 pt-3 border-t border-[#EAEAE5] flex items-center justify-between text-[11px] text-[#8A8A85]">
+                <span>Practice 01</span>
+                <span className="text-[#CAC32C] font-semibold">Active Status</span>
+              </div>
+            </div>
+
+            {/* 02 */}
+            <div className="flex flex-col justify-between group">
+              <div>
+                <div className="flex items-center gap-2 mb-2">
+                  <span className="text-[11px] font-mono font-semibold text-[#8A8A85] uppercase tracking-wider">
+                    Licence
+                  </span>
+                  <span className="text-xs font-mono font-bold text-[#1A1A1A]">
+                    7020003
+                  </span>
+                </div>
+                <h4 className="text-base sm:text-lg font-bold text-[#1A1A1A] tracking-tight group-hover:text-[#CAC32C] transition-colors mb-2">
+                  Management Consultancies
+                </h4>
+                <p className="text-xs sm:text-[13px] text-[#6B6B6B] leading-relaxed">
+                  Target operating model design, corporate governance, and executive board advisory.
+                </p>
+              </div>
+              <div className="mt-4 pt-3 border-t border-[#EAEAE5] flex items-center justify-between text-[11px] text-[#8A8A85]">
+                <span>Practice 02</span>
+                <span className="text-[#CAC32C] font-semibold">Active Status</span>
+              </div>
+            </div>
+
+            {/* 03 */}
+            <div className="flex flex-col justify-between group">
+              <div>
+                <div className="flex items-center gap-2 mb-2">
+                  <span className="text-[11px] font-mono font-semibold text-[#8A8A85] uppercase tracking-wider">
+                    Licence
+                  </span>
+                  <span className="text-xs font-mono font-bold text-[#1A1A1A]">
+                    7020008
+                  </span>
+                </div>
+                <h4 className="text-base sm:text-lg font-bold text-[#1A1A1A] tracking-tight group-hover:text-[#CAC32C] transition-colors mb-2">
+                  Human Resources & Capability
+                </h4>
+                <p className="text-xs sm:text-[13px] text-[#6B6B6B] leading-relaxed">
+                  Workforce skills impact mapping, role-specific fluency, and leadership enablement.
+                </p>
+              </div>
+              <div className="mt-4 pt-3 border-t border-[#EAEAE5] flex items-center justify-between text-[11px] text-[#8A8A85]">
+                <span>Practice 03</span>
+                <span className="text-[#CAC32C] font-semibold">Active Status</span>
+              </div>
+            </div>
+
+            {/* 04 */}
+            <div className="flex flex-col justify-between group">
+              <div>
+                <div className="flex items-center gap-2 mb-2">
+                  <span className="text-[11px] font-mono font-semibold text-[#8A8A85] uppercase tracking-wider">
+                    Licence
+                  </span>
+                  <span className="text-xs font-mono font-bold text-[#1A1A1A]">
+                    7020020
+                  </span>
+                </div>
+                <h4 className="text-base sm:text-lg font-bold text-[#1A1A1A] tracking-tight group-hover:text-[#CAC32C] transition-colors mb-2">
+                  Project Development
+                </h4>
+                <p className="text-xs sm:text-[13px] text-[#6B6B6B] leading-relaxed">
+                  Stage-gate delivery assurance, capital feasibility, and PMO programme governance.
+                </p>
+              </div>
+              <div className="mt-4 pt-3 border-t border-[#EAEAE5] flex items-center justify-between text-[11px] text-[#8A8A85]">
+                <span>Practice 04</span>
+                <span className="text-[#CAC32C] font-semibold">Active Status</span>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* 6. WHY ASHERON */}
-      <section className="py-24 bg-slate-50">
-        <div className="container mx-auto px-6 max-w-7xl">
-          <h2 className="text-3xl md:text-4xl font-semibold mb-16">Why organisations engage us.</h2>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-            <div>
-              <div className="w-8 h-8 border-b-2 border-gold-500 mb-6" />
-              <h3 className="text-xl font-semibold mb-4">Deep UAE market experience</h3>
-              <p className="text-slate-600 leading-relaxed">
-                Advisory grounded in how UAE organisations, regulators, and markets actually operate, not imported templates.
-              </p>
-            </div>
-            <div>
-              <div className="w-8 h-8 border-b-2 border-gold-500 mb-6" />
-              <h3 className="text-xl font-semibold mb-4">Governance-first innovation</h3>
-              <p className="text-slate-600 leading-relaxed">
-                Technology and transformation delivered with accountable ownership, documented controls, and auditable evidence.
-              </p>
-            </div>
-            <div>
-              <div className="w-8 h-8 border-b-2 border-gold-500 mb-6" />
-              <h3 className="text-xl font-semibold mb-4">Delivery discipline</h3>
-              <p className="text-slate-600 leading-relaxed">
-                We stay through implementation, where most initiatives fail, and measure the result.
-              </p>
-            </div>
+      {/* ============== FAQs (Matching Phos Accordion) ============== */}
+      <section className="section--dark sframe sframe--dark sframe--rails py-24 md:py-32 bg-[#202020]">
+        <div className="wrap">
+          <div className="max-w-4xl mx-auto">
+            <h2 className="t-h3 text-white font-bold mb-12">
+              Frequently Asked Questions
+            </h2>
+            <FaqAccordion />
           </div>
         </div>
       </section>
 
-      {/* 7. INDUSTRIES */}
-      <section className="py-24 bg-white">
-        <div className="container mx-auto px-6 max-w-7xl">
-          <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 gap-6">
-            <h2 className="text-3xl md:text-4xl font-semibold">Sectors we serve.</h2>
-          </div>
-          
-          <div className="flex flex-wrap gap-4">
-            {[
-              "Banking & Finance", "Insurance", "Fintech & Virtual Assets", 
-              "Government & Public Sector", "Professional Services", 
-              "Real Estate & Family Groups", "Trade & Logistics", "Healthcare & Education"
-            ].map((sector) => (
-              <Link key={sector} href="/industries" className="px-6 py-4 border border-slate-200 rounded-sm hover:border-navy-900 hover:bg-slate-50 transition-colors font-medium text-navy-900">
-                {sector}
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* 8. INSIGHTS PREVIEW */}
-      <section className="py-24 bg-off-white">
-        <div className="container mx-auto px-6 max-w-7xl">
-          <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 gap-6">
+      {/* ============== CONTACT FORM (Matching Phos 2-Step Form) ============== */}
+      <section id="contact" className="section--dark sframe sframe--dark sframe--rails py-24 md:py-32 bg-[#1b1b1b] border-t border-white/10">
+        <div className="wrap">
+          <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_1fr] gap-14 items-start">
+            
+            {/* Left Intro */}
             <div>
-              <h2 className="text-3xl md:text-4xl font-semibold mb-4">Insights.</h2>
-              <p className="text-lg text-slate-600 max-w-2xl">
-                Practical commentary on governance, AI adoption, and delivery in the UAE.
+              <span className="text-xs font-semibold uppercase tracking-widest text-[#CAC32C] block mb-4">
+                Schedule a Consultation
+              </span>
+              <h2 className="t-title text-white font-medium leading-tight mb-6">
+                The fastest way to know whether we’re the right fit, <em>is a conversation.</em>
+              </h2>
+              <p className="t-lead text-white/70 max-w-lg mb-8 text-base md:text-lg">
+                We spend thirty minutes understanding your operational priorities and regulatory landscape. If we can create immediate leverage, we will show you exactly where.
               </p>
+              
+              <div className="space-y-4 pt-6 border-t border-white/10 text-sm text-white/60">
+                <div className="flex items-center gap-3">
+                  <div className="h-2 w-2 rounded-full bg-[#CAC32C]" />
+                  <span>30 minutes, structured, no presentation deck</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <div className="h-2 w-2 rounded-full bg-[#CAC32C]" />
+                  <span>Senior Advisory Partner attendance</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <div className="h-2 w-2 rounded-full bg-[#CAC32C]" />
+                  <span>Non-disclosure & strict client confidentiality</span>
+                </div>
+              </div>
             </div>
-            <Button asChild variant="outline">
-              <Link href="/insights">View all insights</Link>
-            </Button>
-          </div>
-          
-          <div className="border-l-4 border-gold-500 bg-white p-8 text-slate-600">
-            The first insights will be published shortly. Please get in touch to discuss your priorities.
-          </div>
-        </div>
-      </section>
 
-      {/* 9. FINAL CTA */}
-      <section className="py-32 bg-navy-900 text-white text-center">
-        <div className="container mx-auto px-6 max-w-4xl flex flex-col items-center">
-          <h2 className="text-4xl md:text-5xl font-semibold mb-6">
-            Let's discuss what you are trying to deliver.
-          </h2>
-          <p className="text-lg md:text-xl text-slate-300 font-light max-w-2xl leading-relaxed mb-10">
-            A short, confidential conversation is usually enough to establish whether we are the right fit.
-          </p>
-          <Button asChild size="lg" className="bg-white text-navy-900 hover:bg-slate-100">
-            <Link href="/contact">Request a Consultation</Link>
-          </Button>
+            {/* Right 2-Step Form */}
+            <div>
+              <ConsultationForm />
+            </div>
+
+          </div>
         </div>
       </section>
 

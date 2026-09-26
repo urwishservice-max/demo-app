@@ -8,15 +8,23 @@ export const metadata: Metadata = {
 
 export default function ContactPage() {
   return (
-    <div className="flex flex-col bg-white">
+    <div className="flex flex-col bg-white text-[#1A1A1A]">
       {/* HERO */}
-      <section className="bg-navy-900 text-white pt-24 pb-20">
+      <section className="bg-white text-[#111111] pt-28 pb-16 sm:pt-32 sm:pb-20 border-b border-[#E7E7E3]">
         <div className="container mx-auto px-6 max-w-7xl">
           <div className="max-w-3xl">
-            <h1 className="text-4xl md:text-5xl lg:text-7xl font-semibold leading-tight tracking-tight mb-8">
+            <div className="flex items-center gap-2.5 mb-6 sm:mb-8">
+              <span className="h-2 w-2 rounded-full bg-[#CAC32C] flex-shrink-0" />
+              <span className="text-xs sm:text-sm font-bold uppercase tracking-[0.24em] text-[#1A1A1A]">
+                Direct Engagement
+              </span>
+            </div>
+
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-[68px] font-bold leading-[1.08] tracking-tight text-[#111111] mb-8">
               Request a consultation.
             </h1>
-            <p className="text-lg md:text-xl text-slate-200 font-light leading-relaxed">
+
+            <p className="text-lg md:text-xl text-[#3A3A3A] font-light leading-relaxed">
               Tell us briefly what you are trying to deliver. We will respond within one business day.
             </p>
           </div>

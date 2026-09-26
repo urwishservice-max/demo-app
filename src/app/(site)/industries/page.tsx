@@ -44,15 +44,23 @@ const industries = [
 
 export default function IndustriesPage() {
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col bg-white text-[#1A1A1A]">
       {/* HERO */}
-      <section className="bg-navy-900 text-white pt-24 pb-32">
+      <section className="bg-white text-[#111111] pt-28 pb-16 sm:pt-32 sm:pb-24 border-b border-[#E7E7E3]">
         <div className="container mx-auto px-6 max-w-7xl">
           <div className="max-w-4xl">
-            <h1 className="text-4xl md:text-5xl lg:text-7xl font-semibold leading-tight tracking-tight mb-8">
+            <div className="flex items-center gap-2.5 mb-6 sm:mb-8">
+              <span className="h-2 w-2 rounded-full bg-[#CAC32C] flex-shrink-0" />
+              <span className="text-xs sm:text-sm font-bold uppercase tracking-[0.24em] text-[#1A1A1A]">
+                Sector Depth & Experience
+              </span>
+            </div>
+
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-[68px] font-bold leading-[1.08] tracking-tight text-[#111111] mb-8">
               Industries we serve.
             </h1>
-            <p className="text-lg md:text-xl text-slate-200 font-light max-w-3xl leading-relaxed">
+
+            <p className="text-lg md:text-xl text-[#3A3A3A] font-light max-w-3xl leading-relaxed">
               Our work concentrates on organisations where governance, regulation, and delivery pressure meet.
             </p>
           </div>
@@ -60,17 +68,17 @@ export default function IndustriesPage() {
       </section>
 
       {/* INDUSTRIES GRID */}
-      <section className="py-24 bg-white">
+      <section className="py-24 bg-[#FAFAF8]">
         <div className="container mx-auto px-6 max-w-7xl">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {industries.map((industry, idx) => (
               <div 
                 key={idx} 
-                className="bg-white p-8 border border-slate-200 rounded-sm hover:border-gold-300/50 hover:shadow-lg transition-all duration-300 flex flex-col h-full group"
+                className="bg-white p-8 border border-[#E7E7E3] rounded-2xl hover:border-[#CAC32C] hover:shadow-lg transition-all duration-300 flex flex-col h-full group"
               >
-                <div className="w-8 h-8 border-b-2 border-slate-200 group-hover:border-gold-500 transition-colors mb-6" />
-                <h3 className="text-xl font-semibold mb-4 text-navy-900 group-hover:text-gold-500 transition-colors">{industry.title}</h3>
-                <p className="text-slate-600 text-sm leading-relaxed flex-1">
+                <div className="w-8 h-8 border-b-2 border-[#E7E7E3] group-hover:border-[#CAC32C] transition-colors mb-6" />
+                <h3 className="text-xl font-semibold mb-4 text-[#111111] group-hover:text-[#CAC32C] transition-colors">{industry.title}</h3>
+                <p className="text-[#6B6B6B] text-sm leading-relaxed flex-1">
                   {industry.desc}
                 </p>
               </div>
@@ -80,12 +88,12 @@ export default function IndustriesPage() {
       </section>
 
       {/* CTA */}
-      <section className="py-24 bg-slate-50 border-t border-slate-200">
+      <section className="py-24 bg-white border-t border-[#E7E7E3]">
         <div className="container mx-auto px-6 max-w-3xl text-center flex flex-col items-center">
-          <h2 className="text-3xl font-semibold mb-8 text-navy-900">
+          <h2 className="text-3xl font-semibold mb-8 text-[#111111]">
             Not sure where your organisation fits? Start with a conversation.
           </h2>
-          <Button asChild size="lg">
+          <Button asChild size="lg" className="rounded-full bg-[#1A1A1A] text-white hover:bg-[#CAC32C] hover:text-[#1A1A1A]">
             <Link href="/contact">Request a Consultation</Link>
           </Button>
         </div>

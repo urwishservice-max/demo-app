@@ -9,15 +9,16 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center whitespace-nowrap rounded-sm text-sm font-medium ring-offset-white transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-navy-900 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:-translate-y-0.5",
+  "inline-flex items-center justify-center whitespace-nowrap rounded-full text-sm font-semibold transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#CAC32C] focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:-translate-y-0.5",
   {
     variants: {
       variant: {
-        default: "bg-navy-900 text-white hover:bg-navy-700",
-        secondary: "bg-slate-200 text-navy-900 hover:bg-slate-300",
-        outline: "border border-navy-900 bg-white hover:bg-slate-200 text-navy-900",
-        ghost: "hover:bg-slate-200 hover:text-navy-900 text-slate-500",
-        link: "text-navy-900 underline-offset-4 hover:underline",
+        default: "bg-[#CAC32C] text-[#202020] hover:bg-[#B5AE22] shadow-[0_4px_18px_rgba(202,195,44,0.3)]",
+        secondary: "bg-[#DCDCDC] text-[#202020] hover:bg-[#cacaca]",
+        outline: "border border-[#E7E7E3] bg-[#FFFFFF] hover:bg-[#FAFAF8] text-[#202020] hover:border-[#CAC32C]",
+        dark: "bg-[#202020] text-white hover:bg-[#111111] hover:border-[#CAC32C]",
+        ghost: "hover:bg-[#E7E7E3]/50 hover:text-[#202020] text-[#6B6B6B]",
+        link: "text-[#202020] hover:text-[#CAC32C] underline-offset-4 hover:underline",
       },
       size: {
         default: "h-12 px-6 py-2",

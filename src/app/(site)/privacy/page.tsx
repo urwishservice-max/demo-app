@@ -7,13 +7,19 @@ export const metadata: Metadata = {
 
 export default function PrivacyPage() {
   return (
-    <div className="flex flex-col bg-white">
-      <section className="bg-navy-900 text-white pt-24 pb-20">
+    <div className="flex flex-col bg-white text-[#1A1A1A]">
+      <section className="bg-white text-[#111111] pt-28 pb-16 sm:pt-32 sm:pb-20 border-b border-[#E7E7E3]">
         <div className="container mx-auto px-6 max-w-4xl">
-          <h1 className="text-4xl md:text-5xl font-semibold leading-tight tracking-tight mb-8">
+          <div className="flex items-center gap-2.5 mb-6">
+            <span className="h-2 w-2 rounded-full bg-[#CAC32C] flex-shrink-0" />
+            <span className="text-xs sm:text-sm font-bold uppercase tracking-[0.24em] text-[#1A1A1A]">
+              Legal & Compliance
+            </span>
+          </div>
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold leading-[1.08] tracking-tight text-[#111111] mb-6">
             Privacy Notice
           </h1>
-          <p className="text-lg text-slate-200 font-light leading-relaxed">
+          <p className="text-base sm:text-lg text-[#6B6B6B] font-light leading-relaxed">
             Last updated: [DATE]
           </p>
         </div>

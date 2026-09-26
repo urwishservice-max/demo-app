@@ -14,6 +14,7 @@
     "@radix-ui/react-slot": "^1.3.3",
     "@sanity/image-url": "^2.1.1",
     "@sanity/vision": "^5.31.1",
+    "@types/three": "^0.186.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "framer-motion": "^13.1.0",
@@ -27,6 +28,7 @@
     "styled-components": "^6.5.3",
     "tailwind-merge": "^3.6.0",
     "tailwindcss-animate": "^1.0.7",
+    "three": "^0.186.1",
     "zod": "^4.4.3"
   },
   "devDependencies": {
@@ -36,6 +38,7 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.3.1",
+    "raw-loader": "^4.0.2",
     "tailwindcss": "^4",
     "typescript": "^5"
   }

@@ -15,7 +15,7 @@ const securityHeaders = [
   },
   {
     key: 'X-Frame-Options',
-    value: 'DENY'
+    value: 'SAMEORIGIN'
   },
   {
     key: 'Permissions-Policy',
@@ -23,11 +23,29 @@ const securityHeaders = [
   },
   {
     key: 'Content-Security-Policy',
-    value: "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://challenges.cloudflare.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https:; font-src 'self' data:;"
+    value: "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://challenges.cloudflare.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https: https://cdn.sanity.io; font-src 'self' data:; connect-src 'self' https://*.sanity.io wss://*.sanity.io https://*.api.sanity.io wss://*.api.sanity.io https://sanity.io; frame-src 'self' blob: data: https://*.sanity.io https://sanity.io;"
   }
 ];
 
 const nextConfig: NextConfig = {
+  compiler: {
+    styledComponents: true,
+  },
+  turbopack: {
+    rules: {
+      '*.html': {
+        loaders: ['raw-loader'],
+        as: '*.js',
+      },
+    },
+  },
+  webpack: (config) => {
+    config.module.rules.push({
+      test: /\.html$/,
+      use: 'raw-loader',
+    });
+    return config;
+  },
   async headers() {
     return [
       {
