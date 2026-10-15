@@ -19,11 +19,11 @@ export function ApproachWorkflow() {
   });
 
   // Smooth horizontal translation of the entire workflow canvas
-  // Moves from 0px to -520px to reveal all 5 cards including Node 05
-  const x = useTransform(smooth, [0.05, 0.92], ["0px", "-520px"]);
+  // On mobile (320px-430px), needs translation to reveal all 5 cards
+  const x = useTransform(smooth, [0.05, 0.95], ["0px", "-1280px"]);
 
   // Progress bar indicator width
-  const progressBarWidth = useTransform(smooth, [0.05, 0.92], ["0%", "100%"]);
+  const progressBarWidth = useTransform(smooth, [0.05, 0.95], ["0%", "100%"]);
 
   return (
     <div 

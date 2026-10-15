@@ -111,7 +111,7 @@ export function PracticeTabs() {
       <div className="mb-10">
         <div className="flex items-center gap-3 mb-4">
           <span className="text-[11px] font-bold uppercase tracking-[0.22em] text-[#202020]/70">
-            The Acheron Standard
+            The Asheron Standard
           </span>
           <div className="h-[1px] w-20 bg-[#D8D8D3]" />
         </div>
@@ -120,7 +120,7 @@ export function PracticeTabs() {
           <div className="lg:col-span-7">
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-[#202020] leading-[1.12]">
               What you actually{" "}
-              <span className="text-[#CAC32C] block sm:inline">get from Acheron.</span>
+              <span className="text-[#FFC400] block sm:inline">get from Asheron.</span>
             </h2>
           </div>
           <div className="lg:col-span-5 lg:pl-4">
