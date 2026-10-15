@@ -1,6 +1,7 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useRef } from "react"
+import { motion, useScroll, useTransform, useSpring } from "framer-motion"
 import { Shield, BarChart3 } from "lucide-react"
 
 const values = [
@@ -35,11 +36,30 @@ const values = [
 
 export function WhatDrivesUs() {
   const [activeCard, setActiveCard] = useState<number>(0)
+  const containerRef = useRef<HTMLDivElement>(null)
+
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start end", "end start"],
+  })
+
+  const smooth = useSpring(scrollYProgress, { stiffness: 90, damping: 24 })
+  const cardY1 = useTransform(smooth, [0, 1], ["20px", "-20px"])
+  const cardY2 = useTransform(smooth, [0, 1], ["40px", "-40px"])
+  const cardY3 = useTransform(smooth, [0, 1], ["60px", "-60px"])
+
+  const cardYs = [cardY1, cardY2, cardY3]
 
   return (
-    <div className="w-full">
+    <div ref={containerRef} className="w-full">
       {/* 1. Top Section Header */}
-      <div className="flex flex-col md:flex-row md:items-start justify-between gap-6 mb-8 sm:mb-10">
+      <motion.div 
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-40px" }}
+        transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+        className="flex flex-col md:flex-row md:items-start justify-between gap-6 mb-8 sm:mb-10"
+      >
         <div>
           {/* Eyebrow with extending hairline rule */}
           <div className="flex items-center gap-4 mb-4">
@@ -69,19 +89,26 @@ export function WhatDrivesUs() {
           </p>
           <div className="w-10 h-[1.5px] bg-[#E2E0DD] ml-auto mt-2" />
         </div>
-      </div>
+      </motion.div>
 
-      {/* 2. Three Cards Grid (Compact, window-friendly size) */}
+      {/* 2. Three Cards Grid with Differential Parallax Float */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-5 lg:gap-6 mb-8">
         {values.map((item, idx) => {
           const isActive = activeCard === idx
           const IconComponent = item.icon
+          const y = cardYs[idx]
 
           return (
-            <div
+            <motion.div
               key={item.id}
+              style={{ y }}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-20px" }}
+              transition={{ duration: 0.6, delay: idx * 0.12, ease: [0.16, 1, 0.3, 1] }}
+              whileHover={{ scale: 1.02 }}
               onClick={() => setActiveCard(idx)}
-              className={`rounded-[24px] p-6 sm:p-7 flex flex-col justify-between transition-all duration-300 cursor-pointer min-h-[360px] sm:min-h-[380px] border ${
+              className={`rounded-[24px] p-6 sm:p-7 flex flex-col justify-between transition-colors duration-300 cursor-pointer min-h-[360px] sm:min-h-[380px] border shadow-sm ${
                 isActive
                   ? "bg-[#351779] border-[#351779] text-white shadow-xl"
                   : "bg-[#FFFFFF] hover:bg-[#F8F7F5] border-[#E2E0DD] hover:border-[#351779]/30 text-[#080808]"
@@ -139,7 +166,7 @@ export function WhatDrivesUs() {
                   </span>
                 </div>
               </div>
-            </div>
+            </motion.div>
           )
         })}
       </div>
