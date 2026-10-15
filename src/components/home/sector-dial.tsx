@@ -274,16 +274,17 @@ export function SectorDial() {
       <div className="w-full flex-1 grid grid-cols-1 lg:grid-cols-12 items-center gap-8 my-auto py-6">
         
         {/* Left Column (6 cols): The Rotary Dial */}
-        <div className="lg:col-span-6 flex items-center justify-center lg:justify-end">
-          <div
-            ref={dialRef}
-            onMouseDown={handleMouseDown}
-            onTouchStart={handleTouchStart}
-            style={{ width: `${boxSize}px`, height: `${boxSize}px` }}
-            className={`relative shrink-0 select-none ${
-              isDragging ? "cursor-grabbing" : "cursor-grab"
-            }`}
-          >
+        <div className="lg:col-span-6 flex items-center justify-center lg:justify-end overflow-hidden py-4">
+          <div className="w-[300px] h-[300px] sm:w-[360px] sm:h-[360px] md:w-[400px] md:h-[400px] flex items-center justify-center">
+            <div
+              ref={dialRef}
+              onMouseDown={handleMouseDown}
+              onTouchStart={handleTouchStart}
+              style={{ width: `${boxSize}px`, height: `${boxSize}px` }}
+              className={`relative shrink-0 select-none scale-[0.75] sm:scale-[0.9] md:scale-100 origin-center ${
+                isDragging ? "cursor-grabbing" : "cursor-grab"
+              }`}
+            >
             {/* SVG Dashed Circular Orbit Line and Stop Marker Dot */}
             <svg
               className="absolute inset-0 w-full h-full pointer-events-none"
@@ -364,6 +365,7 @@ export function SectorDial() {
                 )
               })}
             </div>
+          </div>
           </div>
         </div>
 

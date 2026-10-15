@@ -100,8 +100,8 @@ export function Footer() {
             <div className="col-span-12 md:col-span-11 flex flex-col justify-between">
               
               {/* Row 1: Massive Display Typography 'asheron' (Matching 'dance' in reference) */}
-              <div className="relative border-b border-white/10 py-8 sm:py-12 px-6 sm:px-12 flex items-center justify-center overflow-hidden">
-                <h2 className="text-6xl sm:text-8xl md:text-9xl lg:text-[130px] font-black tracking-[-0.04em] text-white/95 lowercase select-none drop-shadow-2xl">
+              <div className="relative border-b border-white/10 py-6 sm:py-10 md:py-12 px-4 sm:px-12 flex items-center justify-center overflow-hidden">
+                <h2 className="text-5xl sm:text-7xl md:text-8xl lg:text-9xl xl:text-[130px] font-black tracking-[-0.04em] text-white/95 lowercase select-none drop-shadow-2xl text-center">
                   asheron
                 </h2>
 

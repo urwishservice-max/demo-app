@@ -211,10 +211,10 @@ export function HeroSection() {
 
         {/* Spaced Wordmark with Cinematic Tracking Expansion */}
         <motion.h1
-          initial={{ opacity: 0, y: 24, letterSpacing: "0.22em" }}
-          animate={{ opacity: 1, y: 0, letterSpacing: "0.38em" }}
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.1, delay: 0.45, ease: [0.16, 1, 0.3, 1] }}
-          className="mt-8 text-3xl sm:text-4xl md:text-[44px] lg:text-[50px] font-normal tracking-[0.38em] text-[#080808] uppercase select-none leading-none"
+          className="mt-6 sm:mt-8 text-2xl sm:text-4xl md:text-[44px] lg:text-[50px] font-normal tracking-[0.24em] sm:tracking-[0.38em] text-[#080808] uppercase select-none leading-none max-w-full overflow-hidden text-ellipsis"
         >
           A S H E R O N
         </motion.h1>
