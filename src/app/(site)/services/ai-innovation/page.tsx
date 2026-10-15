@@ -54,29 +54,33 @@ export default function AIInnovationPage() {
           "Implementation Oversight"
         ]}
       />
-      {/* HERO SECTION - VIEWPORT-OPTIMIZED FULL SIZE VIDEO */}
-      <section className="relative overflow-hidden bg-white text-[#141414] min-h-[85vh] lg:min-h-[90vh] flex items-center pt-24 pb-20">
-        <AIHeroVideo src="/control1.mp4" />
+      {/* HERO SECTION - MOBILE: VIDEO UNBLOCKED WITH CONTENT BELOW / DESKTOP: FULLSCREEN WITH OVERLAY */}
+      <section className="relative bg-white text-[#141414] overflow-hidden">
+        {/* VIDEO CONTAINER: On mobile it has dedicated visible height (50vh to 60vh), on lg+ it is absolute background */}
+        <div className="relative lg:absolute lg:inset-0 w-full h-[52vh] sm:h-[60vh] lg:h-full bg-white flex items-center justify-center overflow-hidden">
+          <AIHeroVideo src="/control1.mp4" />
+        </div>
 
-        <div className="relative z-10 w-full max-w-[1700px] mx-auto px-5 sm:px-10 lg:px-12 xl:px-16 flex flex-col lg:flex-row lg:items-center justify-between gap-6 sm:gap-10 lg:gap-8 pointer-events-none">
+        {/* CONTENT CONTAINER: On mobile flows cleanly UNDER the video, on lg+ floats as transparent flanks over the video */}
+        <div className="relative z-10 w-full max-w-[1700px] mx-auto px-6 sm:px-10 lg:px-12 xl:px-16 pt-6 pb-16 lg:py-32 min-h-0 lg:min-h-[88vh] flex flex-col lg:flex-row lg:items-center justify-between gap-8 lg:gap-8 pointer-events-none">
           {/* LEFT FLANK: Licence & Main Title */}
-          <div className="pointer-events-auto w-full lg:w-[34%] xl:w-[30%] max-w-[440px] bg-white/70 backdrop-blur-md border border-white/60 shadow-xl lg:shadow-none lg:bg-transparent lg:border-none p-5 sm:p-7 lg:p-0 rounded-2xl lg:rounded-none">
+          <div className="pointer-events-auto w-full lg:w-[34%] xl:w-[30%] max-w-[440px] bg-white lg:bg-transparent p-6 sm:p-8 lg:p-0 rounded-2xl border border-[#E2E0DD] lg:border-none shadow-sm lg:shadow-none">
             {/* Borderless Licence Marker */}
-            <div className="flex items-center gap-2.5 mb-3 sm:mb-5">
+            <div className="flex items-center gap-2.5 mb-4 sm:mb-6">
               <span className="h-2 w-2 rounded-full bg-[#FFC400] flex-shrink-0" />
               <span className="text-xs sm:text-sm font-bold uppercase tracking-[0.24em] text-[#080808]">
                 Licence 7020039
               </span>
             </div>
             
-            <h1 className="text-2xl sm:text-4xl lg:text-4xl xl:text-5xl font-bold leading-[1.12] tracking-tight text-[#080808]">
+            <h1 className="text-3xl sm:text-4xl lg:text-4xl xl:text-5xl font-bold leading-[1.12] tracking-tight text-[#080808]">
               AI that works within your controls.
             </h1>
           </div>
 
           {/* RIGHT FLANK: Narrative Description */}
-          <div className="pointer-events-auto w-full lg:w-[34%] xl:w-[30%] max-w-[440px] bg-white/70 backdrop-blur-md border border-white/60 shadow-xl lg:shadow-none lg:bg-transparent lg:border-none p-5 sm:p-7 lg:p-0 rounded-2xl lg:rounded-none">
-            <div className="space-y-3 sm:space-y-4 text-xs sm:text-base text-[#080808]/85 font-normal leading-relaxed">
+          <div className="pointer-events-auto w-full lg:w-[34%] xl:w-[30%] max-w-[440px] bg-white lg:bg-transparent p-6 sm:p-8 lg:p-0 rounded-2xl border border-[#E2E0DD] lg:border-none shadow-sm lg:shadow-none">
+            <div className="space-y-4 text-sm sm:text-base text-[#080808]/75 font-normal leading-relaxed">
               <p>
                 AI adoption should create measurable value without weakening governance, confidentiality, regulatory compliance, or accountability. Asheron helps organisations move from isolated experimentation to practical, controlled, and scalable AI-enabled ways of working.
               </p>
