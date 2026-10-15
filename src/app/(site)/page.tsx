@@ -91,9 +91,11 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ============== FOUR PRACTICES (The Asheron Standard - Full Screen) ============== */}
-      <section id="phases" className="w-full bg-[#FFFFFF] text-[#080808] border-b border-[#E2E0DD] overflow-hidden">
-        <PracticeTabs />
+      {/* ============== FOUR PRACTICES (The Asheron Standard) ============== */}
+      <section id="phases" className="w-full bg-[#FFFFFF] text-[#080808] border-b border-[#E2E0DD] py-16 sm:py-24">
+        <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16">
+          <PracticeTabs />
+        </div>
       </section>
 
       {/* ============== WHAT DRIVES US (Built for a higher standard) ============== */}
