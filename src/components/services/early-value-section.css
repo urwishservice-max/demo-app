@@ -1,0 +1,307 @@
+/*
+ * EarlyValueSection — scoped styles
+ * All class names are prefixed ai-file- to avoid collisions.
+ *
+ * Token reference (matching globals.css):
+ *   --color-primary-dark / #080808   → text, rules
+ *   --color-background  / #F8F7F5   → section bg, card bg
+ *   --color-surface     / #FFFFFF   → card top-sheet
+ *   --color-border      / #E2E0DD   → hairlines
+ *   --color-cta         / #351779   → quote text
+ *   --color-primary     / #FFC400   → quote rule, tab accent
+ *   --color-text-muted  / #6B6B6B   → muted text, ref numbers
+ *   --font-sans / DM Sans           → all text
+ */
+
+/* ── Section wrapper ─────────────────────────────────────────────────── */
+
+.ai-file-section {
+  background: var(--color-background, #F8F7F5);
+  color: var(--color-primary-dark, #080808);
+  /* top border from .sframe--rule-top in globals.css */
+}
+
+/* ── Mobile layout ───────────────────────────────────────────────────── */
+
+.ai-file-mobile {
+  display: block;
+  padding: 4rem 1.5rem 3rem;
+  max-width: 1360px;
+  margin: 0 auto;
+}
+
+@media (min-width: 1024px) {
+  .ai-file-mobile {
+    display: none;
+  }
+}
+
+.ai-file-mobile__header {
+  margin-bottom: 2.5rem;
+}
+
+.ai-file-mobile__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.ai-file-mobile__item {
+  display: grid;
+  grid-template-columns: 2.5rem 1fr;
+  gap: 0.75rem;
+  align-items: start;
+  padding: 1.25rem 0;
+  border-top: 1px solid var(--color-border, #E2E0DD);
+}
+
+.ai-file-mobile__num {
+  font-size: 0.6875rem; /* 11px */
+  font-weight: 500;
+  color: var(--color-text-muted, #6B6B6B);
+  padding-top: 0.2em;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.04em;
+}
+
+.ai-file-mobile__text {
+  font-size: 0.9375rem; /* 15px */
+  line-height: 1.6;
+  color: var(--color-primary-dark, #080808);
+  margin: 0;
+}
+
+/* ── Desktop layout ──────────────────────────────────────────────────── */
+
+.ai-file-desktop {
+  display: none;
+  position: relative;
+}
+
+@media (min-width: 1024px) {
+  .ai-file-desktop {
+    display: block;
+  }
+}
+
+/* Sticky viewport — fills the screen height */
+.ai-file-sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  max-width: 1360px;
+  margin: 0 auto;
+  padding: 0 clamp(20px, 3.5vw, 48px);
+  align-items: center;
+  overflow: hidden;
+}
+
+/* ── Left column: heading + quote ───────────────────────────────────── */
+
+.ai-file-left {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  padding-right: 4rem;
+  /* Offset slightly left of centre — deliberate asymmetry from brief */
+  padding-left: 0;
+}
+
+/* ── Heading ─────────────────────────────────────────────────────────── */
+
+.ai-file-heading {
+  font-family: var(--font-sans, "DM Sans", sans-serif);
+  font-weight: 700;
+  font-size: clamp(2.25rem, 3.8vw, 3.75rem);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: var(--color-primary-dark, #080808);
+  margin: 0;
+  text-align: left;
+}
+
+/* Clip container for each line (load animation only) */
+.ai-file-heading__clip {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.15em;
+  line-height: 1.15;
+}
+
+.ai-file-heading__line {
+  display: block;
+}
+
+.ai-file-heading--mobile {
+  font-size: clamp(2rem, 6vw, 2.75rem);
+  margin-bottom: 1.5rem;
+}
+
+/* ── Margin quote ────────────────────────────────────────────────────── */
+
+.ai-file-quote {
+  /* framer-motion applies y transform here */
+}
+
+.ai-file-quote__inner {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.125rem;
+}
+
+.ai-file-quote__inner--mobile {
+  margin-top: 1.5rem;
+}
+
+/* Gold vertical rule — matches existing border-l-2 border-[#FFC400] pattern */
+.ai-file-quote__rule {
+  flex-shrink: 0;
+  width: 2px;
+  align-self: stretch;
+  background: var(--color-primary, #FFC400);
+  min-height: 3rem;
+}
+
+.ai-file-quote__text {
+  font-family: var(--font-sans, "DM Sans", sans-serif);
+  font-size: clamp(1.125rem, 1.6vw, 1.375rem);
+  font-weight: 300;
+  line-height: 1.45;
+  color: var(--color-cta, #351779);
+  margin: 0;
+}
+
+/* ── Right column: card stack ────────────────────────────────────────── */
+
+.ai-file-stack {
+  position: relative;
+  /* Cards are positioned: absolute inside this column */
+  height: 340px;
+}
+
+/* ── Individual file card ────────────────────────────────────────────── */
+
+.ai-file-card {
+  position: absolute;
+  inset: 0;
+  /* z-index set per-card via inline style */
+}
+
+.ai-file-card__inner {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: var(--color-surface, #FFFFFF);
+  border: 1px solid var(--color-border, #E2E0DD);
+
+  /*
+   * Deliberately not border-radius: the cards are meant to be sheets/pages,
+   * not the "identical rounded cards" the brief explicitly bans.
+   * A 2px radius only on the bottom-right gives a slight dog-ear feel.
+   */
+  border-radius: 0 0 2px 0;
+
+  /* Quiet shadow — no glow, no spread — just document depth */
+  box-shadow:
+    0 2px 8px rgba(8, 8, 8, 0.06),
+    0 8px 24px rgba(8, 8, 8, 0.04);
+
+  overflow: hidden;
+}
+
+/* Tab at top of card — physical file tab / index divider */
+.ai-file-card__tab {
+  flex-shrink: 0;
+  height: 2.25rem;
+  display: flex;
+  align-items: center;
+  padding: 0 1.25rem;
+  border-bottom: 1px solid var(--color-border, #E2E0DD);
+}
+
+.ai-file-card__tab-text {
+  font-size: 0.625rem; /* 10px */
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Card body */
+.ai-file-card__body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem 1.75rem 1.5rem;
+}
+
+/* Top hairline — matches .sframe--rule-top */
+.ai-file-card__rule {
+  height: 1px;
+  background: var(--color-border, #E2E0DD);
+  margin-bottom: 1.25rem;
+}
+
+.ai-file-card__text {
+  flex: 1;
+  font-size: 0.9375rem; /* 15px — matches .t-body */
+  line-height: 1.65;
+  color: rgba(8, 8, 8, 0.85); /* matches text-[#080808]/85 in page */
+  margin: 0;
+}
+
+.ai-file-card__ref {
+  margin-top: 1.5rem;
+  font-size: 0.6875rem; /* 11px */
+  font-weight: 500;
+  color: var(--color-text-muted, #6B6B6B);
+  letter-spacing: 0.06em;
+  font-variant-numeric: tabular-nums;
+  margin-bottom: 0;
+}
+
+/* ── Disclaimer ──────────────────────────────────────────────────────── */
+
+.ai-file-disclaimer {
+  padding: 2.5rem clamp(20px, 3.5vw, 48px) 3rem;
+  max-width: 1360px;
+  margin: 0 auto;
+  border-top: 1px solid var(--color-border, #E2E0DD);
+}
+
+.ai-file-disclaimer__text {
+  font-size: 0.75rem; /* 12px */
+  line-height: 1.6;
+  color: rgba(8, 8, 8, 0.7); /* matches text-[#080808]/70 in page */
+  margin: 0;
+  max-width: 72ch;
+}
+
+.ai-file-disclaimer__text strong {
+  font-weight: 600;
+  color: var(--color-primary-dark, #080808);
+}
+
+/* ── Focus styles (WCAG) ─────────────────────────────────────────────── */
+
+.ai-file-card:focus-visible,
+.ai-file-card__inner:focus-visible {
+  outline: 2px solid var(--color-primary, #FFC400);
+  outline-offset: 2px;
+}
+
+/* ── Reduced motion — everything static, no transforms ───────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  .ai-file-card,
+  .ai-file-quote {
+    transform: none !important;
+    opacity: 1 !important;
+  }
+}

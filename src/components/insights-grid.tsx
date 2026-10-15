@@ -5,10 +5,24 @@ import { useMemo, useState } from "react"
 
 export type InsightSummary = { _id: string; title: string; slug: string; publishedAt: string; readingTime?: number; excerpt?: string; categoryTitle?: string }
 
-export function InsightsGrid({ insights }: { insights: InsightSummary[] }) {
+const DEFAULT_CATEGORIES = ["All", "AI & Governance", "Strategy", "People & Capability", "Project Delivery", "Regulatory Update"]
+
+export function InsightsGrid({ 
+  insights, 
+  categories: customCategories 
+}: { 
+  insights: InsightSummary[]
+  categories?: string[] 
+}) {
   const [category, setCategory] = useState("All")
+  const categories = useMemo(() => {
+    if (customCategories && customCategories.length > 0) {
+      return ["All", ...Array.from(new Set(customCategories.filter(Boolean)))]
+    }
+    return DEFAULT_CATEGORIES
+  }, [customCategories])
+
   const visible = useMemo(() => category === "All" ? insights : insights.filter((insight) => insight.categoryTitle === category), [category, insights])
-  const categories = ["All", "AI & Governance", "Strategy", "People & Capability", "Project Delivery", "Regulatory Update"]
   return <>
     <div className="flex flex-wrap gap-3 mb-12" aria-label="Filter insights by category">
       {categories.map((item) => <button key={item} onClick={() => setCategory(item)} aria-pressed={category === item} className={`min-h-11 px-4 text-sm font-medium rounded-full transition-colors ${category === item ? "bg-navy-900 text-white" : "bg-slate-100 text-slate-600 hover:bg-slate-200 hover:text-navy-900"}`}>{item}</button>)}

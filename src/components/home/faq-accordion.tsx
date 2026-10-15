@@ -60,7 +60,7 @@ export function FaqAccordion() {
                 <span
                   className={`h-3 w-3 rounded-full transition-all duration-300 ${
                     isOpen
-                      ? "bg-[#CAC32C] shadow-[0_0_12px_#CAC32C] scale-125"
+                      ? "bg-[#FFC400] shadow-[0_0_14px_#FFC400] scale-125"
                       : "bg-white/20 group-hover:bg-white/40"
                   }`}
                 />

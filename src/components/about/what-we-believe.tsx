@@ -1,7 +1,28 @@
 "use client"
 
-import { useEffect, useRef, useState } from "react"
+import React, { useRef, useState } from "react"
+import Link from "next/link"
 import Image from "next/image"
+import { motion, useScroll, useSpring, useTransform, useReducedMotion } from "framer-motion"
+import { ArrowUpRight } from "lucide-react"
+
+/**
+ * ASHERON — WHAT WE BELIEVE (MINIMALIST EDITORIAL ASYMMETRIC REDESIGN)
+ * 
+ * Strict Brand Guidelines & Visual System (Matching Industries/Approach editorial rhythm):
+ * - Canvas Background: #F8F7F5 (Warm Editorial Bone)
+ * - Deep Inks: #080808 (Carbon Noir)
+ * - Hairline Dividers: #E2E0DD
+ * - Brand Primary Gold: #FFC400
+ * - Brand Corporate Purple: #351779 (Hover: #2B1263)
+ * - Clean, open background: NO visible grid lines, NO graph-paper, NO blueprint pattern
+ * 
+ * Editorial Asymmetric Rhythm across 4 Beliefs:
+ * - Belief 01 (Realism): Large statement on the left, architectural photograph on the right
+ * - Belief 02 (Duality): Photograph offset to the left, statement & elaboration on the right
+ * - Belief 03 (Transfer): Wide oversized headline with image offset below
+ * - Belief 04 (Integrity): Full-width horizontal corporate purple (#351779) highlight strip with gold accents
+ */
 
 interface BeliefItem {
   id: string
@@ -11,6 +32,7 @@ interface BeliefItem {
   elaboration: string
   image: string
   imageAlt: string
+  accent: string
 }
 
 const beliefs: BeliefItem[] = [
@@ -20,8 +42,9 @@ const beliefs: BeliefItem[] = [
     tag: "REALISM",
     statement: "Advice is only valuable if it can be implemented within the client's real constraints.",
     elaboration: "We size operating models and governance to real operational realities, not theoretical ideals.",
-    image: "/about/belief_1.jpg",
-    imageAlt: "Architectural concrete structure with bold yellow geometric facet",
+    image: "/about_canopy.jpg",
+    imageAlt: "Architectural structure with bold geometry",
+    accent: "PRACTICAL GOVERNANCE",
   },
   {
     id: "02",
@@ -29,8 +52,9 @@ const beliefs: BeliefItem[] = [
     tag: "DUALITY",
     statement: "Innovation and control are not opposites; the strongest organisations design both at once.",
     elaboration: "Speed without governance creates vulnerability; governance without speed breeds obsolescence.",
-    image: "/about/belief_2.jpg",
+    image: "/practice_ai.jpg",
     imageAlt: "3D architectural spiral cone with yellow and graphite ridges",
+    accent: "VELOCITY & ASSURANCE",
   },
   {
     id: "03",
@@ -38,8 +62,9 @@ const beliefs: BeliefItem[] = [
     tag: "TRANSFER",
     statement: "Capability must transfer to the client team, not remain with the adviser.",
     elaboration: "We build self-sustaining competence within leadership and operations so progress continues after handoff.",
-    image: "/about/belief_3.jpg",
-    imageAlt: "Curving concrete architectural hall with sweeping yellow light",
+    image: "/about_leadership.jpg",
+    imageAlt: "Curving concrete architectural hall with sweeping light",
+    accent: "TALENT ADOPTION",
   },
   {
     id: "04",
@@ -47,305 +72,274 @@ const beliefs: BeliefItem[] = [
     tag: "INTEGRITY",
     statement: "Independence and discretion are conditions of the work, not features of it.",
     elaboration: "We provide clear, unvarnished guidance protected by rigorous confidentiality and fiduciary clarity.",
-    image: "/about/belief_4.jpg",
-    imageAlt: "Matte black curved architectural sculpture with inner yellow glow",
+    image: "/about_hero_burj.jpg",
+    imageAlt: "Curved architectural sculpture with inner glow",
+    accent: "FIDUCIARY INDEPENDENCE",
   },
 ]
 
 export function WhatWeBelieve() {
-  const containerRef = useRef<HTMLDivElement>(null)
-  const [activeIndex, setActiveIndex] = useState(0)
-  const [progress, setProgress] = useState(0)
-
-  const stepRef = useRef(0)
-  const isLockedRef = useRef(false)
-
-  useEffect(() => {
-    const handleScroll = () => {
-      if (!containerRef.current) return
-      const rect = containerRef.current.getBoundingClientRect()
-      const totalScrollable = rect.height - window.innerHeight
-      if (totalScrollable <= 0) return
-
-      const currentScroll = -rect.top
-      const rawProgress = Math.max(0, Math.min(1, currentScroll / totalScrollable))
-      setProgress(rawProgress)
-
-      // Calculate index 0 to 3 based on scroll position
-      const index = Math.min(3, Math.floor(rawProgress * 4))
-      setActiveIndex(index)
-      stepRef.current = index
-    }
-
-    window.addEventListener("scroll", handleScroll, { passive: true })
-    handleScroll()
-    return () => window.removeEventListener("scroll", handleScroll)
-  }, [])
-
-  const scrollToStep = (index: number) => {
-    if (!containerRef.current) return
-    const rect = containerRef.current.getBoundingClientRect()
-    const scrollTop = window.scrollY || document.documentElement.scrollTop
-    const sectionTop = rect.top + scrollTop
-    const totalScrollable = rect.height - window.innerHeight
-    const targetFractions = [0.08, 0.36, 0.64, 0.94]
-    const targetScroll = sectionTop + targetFractions[index] * totalScrollable
-    stepRef.current = index
-    setActiveIndex(index)
-    window.scrollTo({ top: targetScroll, behavior: "smooth" })
-  }
-
-  // Checkpoint locking: catches heavy scroll and locks to next belief without skipping
-  useEffect(() => {
-    const handleWheel = (e: WheelEvent) => {
-      if (!containerRef.current) return
-      const rect = containerRef.current.getBoundingClientRect()
-      const inView = rect.top <= 15 && rect.bottom >= window.innerHeight - 15
-      if (!inView) return
-
-      if (e.deltaY > 18) {
-        if (stepRef.current < 3) {
-          e.preventDefault()
-          if (isLockedRef.current) return
-          isLockedRef.current = true
-          const next = Math.min(3, stepRef.current + 1)
-          scrollToStep(next)
-          setTimeout(() => {
-            isLockedRef.current = false
-          }, 650)
-        }
-      } else if (e.deltaY < -18) {
-        if (stepRef.current > 0) {
-          e.preventDefault()
-          if (isLockedRef.current) return
-          isLockedRef.current = true
-          const prev = Math.max(0, stepRef.current - 1)
-          scrollToStep(prev)
-          setTimeout(() => {
-            isLockedRef.current = false
-          }, 650)
-        }
-      }
-    }
-
-    let touchStartY = 0
-    const handleTouchStart = (e: TouchEvent) => {
-      touchStartY = e.touches[0].clientY
-    }
-
-    const handleTouchMove = (e: TouchEvent) => {
-      if (!containerRef.current) return
-      const rect = containerRef.current.getBoundingClientRect()
-      const inView = rect.top <= 15 && rect.bottom >= window.innerHeight - 15
-      if (!inView) return
-
-      const deltaY = touchStartY - e.touches[0].clientY
-      if (deltaY > 45) {
-        if (stepRef.current < 3) {
-          e.preventDefault()
-          if (isLockedRef.current) return
-          isLockedRef.current = true
-          const next = Math.min(3, stepRef.current + 1)
-          scrollToStep(next)
-          setTimeout(() => {
-            isLockedRef.current = false
-          }, 650)
-        }
-      } else if (deltaY < -45) {
-        if (stepRef.current > 0) {
-          e.preventDefault()
-          if (isLockedRef.current) return
-          isLockedRef.current = true
-          const prev = Math.max(0, stepRef.current - 1)
-          scrollToStep(prev)
-          setTimeout(() => {
-            isLockedRef.current = false
-          }, 650)
-        }
-      }
-    }
-
-    window.addEventListener("wheel", handleWheel, { passive: false })
-    window.addEventListener("touchstart", handleTouchStart, { passive: true })
-    window.addEventListener("touchmove", handleTouchMove, { passive: false })
-
-    return () => {
-      window.removeEventListener("wheel", handleWheel)
-      window.removeEventListener("touchstart", handleTouchStart)
-      window.removeEventListener("touchmove", handleTouchMove)
-    }
-  }, [])
+  const prefersReducedMotion = useReducedMotion()
+  const sectionRef = useRef<HTMLDivElement>(null)
 
   return (
-    /* OUTER SCROLL TRACK (400vh gives comfortable scroll time for each section to come and disappear) */
-    <div ref={containerRef} className="relative w-full h-[380vh] bg-[#FAFAF8]">
-      
-      {/* PINNED FULL-WINDOW VIEWPORT (sticky top-0 h-[100dvh]) */}
-      <div className="sticky top-0 h-[100dvh] w-full overflow-hidden bg-[#FAFAF8] text-[#1A1A1A] border-b border-[#E7E7E3] flex flex-col justify-center">
-        
-        <div className="w-full h-full flex flex-col justify-center">
-          <div className="grid grid-cols-1 lg:grid-cols-12 h-full">
+    <section 
+      ref={sectionRef} 
+      className="relative z-10 px-6 sm:px-10 lg:px-16 py-20 sm:py-28 bg-[#F8F7F5] border-b border-[#E2E0DD] text-[#080808]"
+    >
+      <div className="max-w-7xl mx-auto space-y-20 sm:space-y-28">
+
+        {/* Section Header Strip */}
+        <div className="flex items-center justify-between pb-4 border-b border-[#E2E0DD] text-xs font-mono text-[#080808]/60">
+          <div className="flex items-center gap-3">
+            <span className="font-bold text-[#351779]">02</span>
+            <span className="text-[#080808]/30">/</span>
+            <span className="font-bold tracking-[0.25em] text-[#080808] uppercase">
+              CORE PHILOSOPHY · 04 BELIEFS
+            </span>
+          </div>
+          <span className="tracking-widest hidden sm:inline text-[#351779] font-bold uppercase">
+            WHAT WE BELIEVE
+          </span>
+        </div>
+
+        {/* Section Title & Philosophy Overview */}
+        <div className="max-w-3xl">
+          <h2 className="text-3xl sm:text-5xl lg:text-6xl font-black uppercase tracking-tight text-[#080808] leading-[0.96] mb-6">
+            WHAT WE<br />
+            <span className="text-[#351779] bg-[#FFC400] px-2.5 inline-block">BELIEVE.</span>
+          </h2>
+          <p className="text-base sm:text-lg text-[#080808]/75 leading-relaxed font-normal">
+            Advice is tested not by its elegance on paper, but by its endurance in execution. These four convictions govern every recommendation, governance framework, and roadmap we design.
+          </p>
+        </div>
+
+        {/* =====================================================================
+            BELIEF 01: REALISM
+            Rhythm: Large statement on left, photograph on right
+        ===================================================================== */}
+        <motion.div
+          initial={{ opacity: 0, y: 35 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-60px" }}
+          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+          className="border-b border-[#E2E0DD] pb-16 sm:pb-24"
+        >
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
             
-            {/* ============================================================== */}
-            {/* LEFT COLUMN: Editorial Space + Step Progress Tracker + Semicircle */}
-            {/* ============================================================== */}
-            <div className="lg:col-span-5 relative flex flex-col justify-between p-6 sm:p-8 lg:p-10 xl:p-12 border-b lg:border-b-0 lg:border-r border-[#E7E7E3] overflow-hidden bg-[#FAFAF8] h-full z-20">
-              
-              {/* Top Left Marker */}
-              <div className="relative z-10 flex flex-col gap-3">
-                <div className="w-8 h-[2px] bg-[#1A1A1A]" />
-                
-                <div className="flex items-center gap-2.5 text-[10px] sm:text-[11px] font-semibold tracking-[0.28em] text-[#707070] uppercase select-none">
-                  <span>02</span>
-                  <span className="text-[#D4B924]">/</span>
-                  <span>PHILOSOPHY</span>
+            <div className="lg:col-span-7 flex flex-col justify-between">
+              <div>
+                <div className="flex items-center gap-3 mb-5 font-mono text-xs">
+                  <span className="font-bold text-3xl sm:text-5xl text-[#351779]">01</span>
+                  <span className="w-10 h-[1px] bg-[#E2E0DD]" />
+                  <span className="font-bold tracking-widest text-[#080808]/60 uppercase">{beliefs[0].tag}</span>
                 </div>
-              </div>
 
-              {/* Middle Editorial Title & Scroll Step Navigation */}
-              <div className="relative z-10 my-auto py-4">
-                <h2 className="text-3xl sm:text-4xl lg:text-4xl xl:text-5xl font-black tracking-tight text-[#141414] uppercase leading-[1.05] mb-3 lg:mb-4">
-                  What We<br />
-                  <span className="text-[#D4B924]">Believe.</span>
-                </h2>
+                <h3 className="text-2xl sm:text-4xl lg:text-5xl font-black uppercase tracking-tight text-[#080808] leading-tight mb-6">
+                  {beliefs[0].statement}
+                </h3>
 
-                <p className="text-xs sm:text-[13.5px] lg:text-[13px] xl:text-[14px] text-[#4A4A4A] leading-[1.65] max-w-[420px] mb-6">
-                  Advice is tested not by its elegance on paper, but by its endurance in execution. These four convictions govern every recommendation, governance framework, and roadmap we design.
+                <p className="text-base sm:text-lg text-[#080808]/75 leading-relaxed max-w-xl font-normal mb-8">
+                  {beliefs[0].elaboration}
                 </p>
-
-                {/* SCROLL STEP TRACKER */}
-                <div className="flex flex-col gap-4 max-w-[280px]">
-                  {beliefs.map((b, idx) => {
-                    const isCurrent = activeIndex === idx
-                    return (
-                      <button
-                        key={b.id}
-                        type="button"
-                        onClick={() => scrollToStep(idx)}
-                        className="group flex items-center gap-3.5 text-left transition-all duration-300 py-1 cursor-pointer select-none"
-                      >
-                        {/* Preceding Dash / Bar */}
-                        <span
-                          className={`block transition-all duration-300 rounded-full ${
-                            isCurrent
-                              ? "w-8 h-[2px] bg-[#CAC32C]"
-                              : "w-5 h-[1.5px] bg-[#9E9E9E] group-hover:bg-[#666]"
-                          }`}
-                        />
-                        
-                        {/* Number + Tag */}
-                        <div className="flex items-center gap-2">
-                          <span
-                            className={`text-xs font-mono tracking-[0.2em] uppercase transition-colors ${
-                              isCurrent
-                                ? "text-[#141414] font-bold"
-                                : "text-[#9E9E9E] font-medium group-hover:text-[#666]"
-                            }`}
-                          >
-                            {b.number}
-                          </span>
-                          <span
-                            className={`text-xs font-mono tracking-[0.2em] uppercase transition-colors ${
-                              isCurrent
-                                ? "text-[#141414] font-bold"
-                                : "text-[#9E9E9E] font-medium group-hover:text-[#666]"
-                            }`}
-                          >
-                            {b.tag}
-                          </span>
-                        </div>
-                      </button>
-                    )
-                  })}
-                </div>
               </div>
 
-              {/* Right Divider Line: Iconic Large Yellow Half-Circle */}
-              <div
-                className="hidden lg:block absolute right-0 top-1/2 -translate-y-1/2 w-20 xl:w-28 h-40 xl:h-56 bg-[#F3C911] rounded-l-full shadow-sm select-none pointer-events-none transition-transform duration-500 ease-out"
-                style={{
-                  transform: `translateY(-50%) scale(${1 + (progress % 0.25) * 0.4})`,
-                }}
-              />
-
+              <div className="pt-4 border-t border-[#E2E0DD] flex items-center justify-between text-xs font-mono max-w-xl">
+                <span className="text-[#080808]/50 uppercase tracking-wider">{beliefs[0].accent}</span>
+                <Link href="/contact" className="inline-flex items-center gap-1.5 font-bold uppercase text-[#080808] hover:text-[#351779] transition-colors">
+                  <span>DISCUSS PRIORITIES</span>
+                  <ArrowUpRight className="w-3.5 h-3.5 text-[#FFC400]" />
+                </Link>
+              </div>
             </div>
 
-            {/* ============================================================== */}
-            {/* RIGHT COLUMN: DYNAMIC SCROLL TRANSITION STAGE                  */}
-            {/* Each section comes in and disappears as the user scrolls       */}
-            {/* ============================================================== */}
-            <div className="lg:col-span-7 relative h-full w-full bg-[#FAFAF8] overflow-hidden">
-              
-              {beliefs.map((belief, idx) => {
-                const isActive = activeIndex === idx
-                const isPast = idx < activeIndex
-
-                return (
-                  <div
-                    key={belief.id}
-                    className={`absolute inset-0 w-full h-full flex flex-col lg:flex-row items-stretch justify-between transition-all duration-700 ease-out ${
-                      isActive
-                        ? "opacity-100 translate-y-0 scale-100 pointer-events-auto z-10"
-                        : isPast
-                        ? "opacity-0 -translate-y-12 scale-95 pointer-events-none z-0"
-                        : "opacity-0 translate-y-12 scale-95 pointer-events-none z-0"
-                    }`}
-                  >
-                    
-                    {/* LEFT SUB-COLUMN: TEXT CARD */}
-                    <div className="w-full lg:w-1/2 p-6 sm:p-8 lg:p-8 xl:p-12 flex flex-col justify-between border-b lg:border-b-0 lg:border-r border-[#E7E7E3] bg-white z-10">
-                      
-                      {/* Top Header in Card */}
-                      <div>
-                        <div className="flex items-baseline justify-between mb-2">
-                          <span className="text-4xl sm:text-5xl lg:text-5xl xl:text-6xl font-black tracking-tight text-[#D4B924]">
-                            {belief.number}
-                          </span>
-                          <span className="text-[11px] font-bold tracking-[0.28em] text-[#777] uppercase">
-                            {belief.tag}
-                          </span>
-                        </div>
-                        
-                        <div className="w-10 h-[2px] bg-[#1A1A1A] mb-4" />
-
-                        {/* Primary Statement */}
-                        <h3 className="text-lg sm:text-xl lg:text-xl xl:text-2xl font-black text-[#141414] leading-[1.3] tracking-tight mb-4">
-                          {belief.statement}
-                        </h3>
-
-                        {/* In-depth Elaboration */}
-                        <p className="text-xs sm:text-sm lg:text-[13.5px] xl:text-[14px] text-[#555555] leading-relaxed">
-                          {belief.elaboration}
-                        </p>
-                      </div>
-                    </div>
-
-                    {/* RIGHT SUB-COLUMN: FULL-HEIGHT ARCHITECTURAL IMAGE */}
-                    <div className="w-full lg:w-1/2 relative min-h-[260px] lg:min-h-0 h-full overflow-hidden bg-[#111111]">
-                      <Image
-                        src={belief.image}
-                        alt={belief.imageAlt}
-                        fill
-                        sizes="(max-width: 1024px) 100vw, 40vw"
-                        className={`object-cover transition-transform duration-1000 ease-out ${
-                          isActive ? "scale-100" : "scale-110"
-                        }`}
-                        priority={idx === 0}
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-black/10" />
-                    </div>
-
-                  </div>
-                )
-              })}
-
+            <div className="lg:col-span-5">
+              <div className="group relative w-full aspect-[4/3] overflow-hidden border border-[#E2E0DD] bg-[#080808] rounded-xs shadow-xs">
+                <Image
+                  src={beliefs[0].image}
+                  alt={beliefs[0].imageAlt}
+                  fill
+                  className="object-cover filter grayscale contrast-125 transition-all duration-700 group-hover:scale-105 group-hover:grayscale-0"
+                />
+                <div className="absolute bottom-2.5 left-2.5 px-2.5 py-0.5 bg-black/60 backdrop-blur-xs font-mono text-[9px] text-white tracking-widest uppercase">
+                  PHILOSOPHY // 01 · REALISM
+                </div>
+              </div>
             </div>
 
           </div>
-        </div>
+        </motion.div>
+
+
+        {/* =====================================================================
+            BELIEF 02: DUALITY
+            Rhythm: Photograph offset to left, statement and elaboration on right
+        ===================================================================== */}
+        <motion.div
+          initial={{ opacity: 0, y: 35 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-60px" }}
+          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+          className="border-b border-[#E2E0DD] pb-16 sm:pb-24"
+        >
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
+            
+            <div className="lg:col-span-5 order-2 lg:order-1">
+              <div className="group relative w-full aspect-[4/3] overflow-hidden border border-[#E2E0DD] bg-[#080808] rounded-xs shadow-xs">
+                <Image
+                  src={beliefs[1].image}
+                  alt={beliefs[1].imageAlt}
+                  fill
+                  className="object-cover filter grayscale contrast-125 transition-all duration-700 group-hover:scale-105 group-hover:grayscale-0"
+                />
+                <div className="absolute bottom-2.5 left-2.5 px-2.5 py-0.5 bg-black/60 backdrop-blur-xs font-mono text-[9px] text-white tracking-widest uppercase">
+                  PHILOSOPHY // 02 · DUALITY
+                </div>
+              </div>
+            </div>
+
+            <div className="lg:col-span-7 order-1 lg:order-2 flex flex-col justify-between">
+              <div>
+                <div className="flex items-center gap-3 mb-5 font-mono text-xs">
+                  <span className="font-bold text-3xl sm:text-5xl text-[#351779]">02</span>
+                  <span className="w-10 h-[1px] bg-[#E2E0DD]" />
+                  <span className="font-bold tracking-widest text-[#080808]/60 uppercase">{beliefs[1].tag}</span>
+                </div>
+
+                <h3 className="text-2xl sm:text-4xl lg:text-5xl font-black uppercase tracking-tight text-[#080808] leading-tight mb-6">
+                  {beliefs[1].statement}
+                </h3>
+
+                <p className="text-base sm:text-lg text-[#080808]/75 leading-relaxed max-w-xl font-normal mb-8">
+                  {beliefs[1].elaboration}
+                </p>
+              </div>
+
+              <div className="pt-4 border-t border-[#E2E0DD] flex items-center justify-between text-xs font-mono max-w-xl">
+                <span className="text-[#080808]/50 uppercase tracking-wider">{beliefs[1].accent}</span>
+                <Link href="/contact" className="inline-flex items-center gap-1.5 font-bold uppercase text-[#080808] hover:text-[#351779] transition-colors">
+                  <span>DISCUSS PRIORITIES</span>
+                  <ArrowUpRight className="w-3.5 h-3.5 text-[#FFC400]" />
+                </Link>
+              </div>
+            </div>
+
+          </div>
+        </motion.div>
+
+
+        {/* =====================================================================
+            BELIEF 03: TRANSFER
+            Rhythm: Oversized headline with image offset below
+        ===================================================================== */}
+        <motion.div
+          initial={{ opacity: 0, y: 35 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-60px" }}
+          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+          className="border-b border-[#E2E0DD] pb-16 sm:pb-24"
+        >
+          <div>
+            <div className="flex items-center gap-3 mb-5 font-mono text-xs">
+              <span className="font-bold text-3xl sm:text-5xl text-[#351779]">03</span>
+              <span className="w-10 h-[1px] bg-[#E2E0DD]" />
+              <span className="font-bold tracking-widest text-[#080808]/60 uppercase">{beliefs[2].tag}</span>
+            </div>
+
+            <h3 className="text-3xl sm:text-5xl lg:text-6xl font-black uppercase tracking-tight text-[#080808] leading-[0.95] mb-8">
+              {beliefs[2].statement}
+            </h3>
+
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+              <div className="lg:col-span-7">
+                <p className="text-base sm:text-lg text-[#080808]/75 leading-relaxed max-w-xl font-normal mb-6">
+                  {beliefs[2].elaboration}
+                </p>
+                <div className="pt-4 border-t border-[#E2E0DD] flex items-center justify-between text-xs font-mono max-w-xl">
+                  <span className="text-[#080808]/50 uppercase tracking-wider">{beliefs[2].accent}</span>
+                  <Link href="/contact" className="inline-flex items-center gap-1.5 font-bold uppercase text-[#080808] hover:text-[#351779] transition-colors">
+                    <span>DISCUSS PRIORITIES</span>
+                    <ArrowUpRight className="w-3.5 h-3.5 text-[#FFC400]" />
+                  </Link>
+                </div>
+              </div>
+
+              <div className="lg:col-span-5">
+                <div className="group relative w-full aspect-[16/9] overflow-hidden border border-[#E2E0DD] bg-[#080808] rounded-xs shadow-xs">
+                  <Image
+                    src={beliefs[2].image}
+                    alt={beliefs[2].imageAlt}
+                    fill
+                    className="object-cover filter grayscale contrast-125 transition-all duration-700 group-hover:scale-105 group-hover:grayscale-0"
+                  />
+                  <div className="absolute bottom-2.5 left-2.5 px-2.5 py-0.5 bg-black/60 backdrop-blur-xs font-mono text-[9px] text-white tracking-widest uppercase">
+                    PHILOSOPHY // 03 · TRANSFER
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </motion.div>
+
+
+        {/* =====================================================================
+            BELIEF 04: INTEGRITY
+            Rhythm: Full-width corporate purple (#351779) horizontal strip with gold accents
+        ===================================================================== */}
+        <motion.div
+          initial={{ opacity: 0, y: 35 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-60px" }}
+          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+          className="bg-[#351779] text-white p-8 sm:p-12 lg:p-16 rounded-xs relative overflow-hidden shadow-lg"
+        >
+          {/* Ambient Radial Accent */}
+          <div className="absolute -right-20 -bottom-20 w-96 h-96 bg-[#FFC400]/15 rounded-full blur-3xl pointer-events-none" />
+
+          <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+            
+            <div className="lg:col-span-7">
+              <div className="flex items-center gap-3 mb-5 font-mono text-xs">
+                <span className="font-bold text-3xl sm:text-5xl text-[#FFC400]">04</span>
+                <span className="w-10 h-[1px] bg-white/30" />
+                <span className="font-bold tracking-widest text-[#FFC400] uppercase">{beliefs[3].tag}</span>
+              </div>
+
+              <h3 className="text-2xl sm:text-4xl lg:text-5xl font-black uppercase tracking-tight text-white leading-tight mb-6">
+                {beliefs[3].statement}
+              </h3>
+
+              <p className="text-base sm:text-lg text-white/80 leading-relaxed max-w-xl font-normal mb-8">
+                {beliefs[3].elaboration}
+              </p>
+
+              <div className="pt-4 border-t border-white/20 flex items-center justify-between text-xs font-mono max-w-xl">
+                <span className="text-white/60 uppercase tracking-wider">{beliefs[3].accent}</span>
+                <Link href="/contact" className="inline-flex items-center gap-1.5 font-bold uppercase text-white hover:text-[#FFC400] transition-colors">
+                  <span>DISCUSS PRIORITIES</span>
+                  <ArrowUpRight className="w-3.5 h-3.5 text-[#FFC400]" />
+                </Link>
+              </div>
+            </div>
+
+            <div className="lg:col-span-5">
+              <div className="group relative w-full aspect-[4/3] overflow-hidden border border-white/20 bg-[#080808] rounded-xs">
+                <Image
+                  src={beliefs[3].image}
+                  alt={beliefs[3].imageAlt}
+                  fill
+                  className="object-cover filter contrast-125 transition-all duration-700 group-hover:scale-105"
+                />
+                <div className="absolute bottom-2.5 left-2.5 px-2.5 py-0.5 bg-black/60 backdrop-blur-xs font-mono text-[9px] text-[#FFC400] tracking-widest uppercase">
+                  PHILOSOPHY // 04 · INTEGRITY
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </motion.div>
 
       </div>
-
-    </div>
+    </section>
   )
 }

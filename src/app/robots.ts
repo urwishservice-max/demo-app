@@ -1,18 +1,33 @@
 import { MetadataRoute } from 'next'
+import { getSiteUrl, isProduction } from '@/lib/site-config'
 
 export default function robots(): MetadataRoute.Robots {
-  // Staging: Block crawling
-  // Production: Allow crawling
-  // We assume production for this file, but the prompt says:
-  // "Staging: Block crawling and require HTTP authentication."
-  // For the standard output, we will return standard rules.
-  
+  const baseUrl = getSiteUrl()
+
+  // Staging / Non-production environments must block all crawlers
+  if (!isProduction()) {
+    return {
+      rules: {
+        userAgent: '*',
+        disallow: '/',
+      },
+    }
+  }
+
+  // Production environment allowing search indexing while protecting utility/admin routes
   return {
     rules: {
       userAgent: '*',
       allow: '/',
-      disallow: ['/contact/thank-you'],
+      disallow: [
+        '/contact/thank-you',
+        '/studio',
+        '/studio/*',
+        '/api',
+        '/api/*',
+      ],
     },
-    sitemap: 'https://asheron.example.com/sitemap.xml',
+    sitemap: `${baseUrl}/sitemap.xml`,
   }
 }
+

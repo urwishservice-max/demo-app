@@ -9,16 +9,16 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center whitespace-nowrap rounded-full text-sm font-semibold transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#CAC32C] focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:-translate-y-0.5",
+  "inline-flex items-center justify-center whitespace-nowrap rounded-full text-sm font-semibold transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#351779] focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:-translate-y-0.5",
   {
     variants: {
       variant: {
-        default: "bg-[#CAC32C] text-[#202020] hover:bg-[#B5AE22] shadow-[0_4px_18px_rgba(202,195,44,0.3)]",
-        secondary: "bg-[#DCDCDC] text-[#202020] hover:bg-[#cacaca]",
-        outline: "border border-[#E7E7E3] bg-[#FFFFFF] hover:bg-[#FAFAF8] text-[#202020] hover:border-[#CAC32C]",
-        dark: "bg-[#202020] text-white hover:bg-[#111111] hover:border-[#CAC32C]",
-        ghost: "hover:bg-[#E7E7E3]/50 hover:text-[#202020] text-[#6B6B6B]",
-        link: "text-[#202020] hover:text-[#CAC32C] underline-offset-4 hover:underline",
+        default: "bg-[#351779] text-white hover:bg-[#2B1263] shadow-[0_4px_18px_rgba(53,23,121,0.25)]",
+        secondary: "bg-[#E2E0DD] text-[#080808] hover:bg-[#d5d3d0]",
+        outline: "border border-[#E2E0DD] bg-[#FFFFFF] hover:bg-[#F8F7F5] text-[#080808] hover:border-[#351779]",
+        dark: "bg-[#080808] text-white hover:bg-[#1a1a1a] hover:border-[#FFC400]",
+        ghost: "hover:bg-[#E2E0DD]/50 hover:text-[#080808] text-[#6B6B6B]",
+        link: "text-[#080808] hover:text-[#351779] underline-offset-4 hover:underline",
       },
       size: {
         default: "h-12 px-6 py-2",

@@ -80,7 +80,7 @@ export default function RimTreeConceptPage() {
     <div
       onMouseMove={handleMouseMove}
       className={`relative min-h-[100dvh] h-[100dvh] w-full overflow-hidden select-none flex flex-col justify-between transition-colors duration-700 font-sans ${
-        isDark ? "bg-[#111112] text-white" : "bg-[#EAEAE6] text-[#191919]"
+        isDark ? "bg-[#111112] text-white" : "bg-[#F8F7F5] text-[#080808]"
       }`}
     >
       {/* 1. ARCHITECTURAL BACKGROUND GRADIENT & RADIAL STUDIO LIGHT */}
@@ -129,8 +129,8 @@ export default function RimTreeConceptPage() {
             href="/"
             className="group flex flex-col"
           >
-            <span className="text-xs font-bold tracking-[0.3em] uppercase group-hover:text-[#D4B924] transition-colors">
-              ACHERON · LABS
+            <span className="text-xs font-bold tracking-[0.3em] uppercase group-hover:text-[#FFC400] transition-colors">
+              ASHERON · LABS
             </span>
             <span className="text-[9px] font-mono tracking-widest opacity-50 uppercase">
               STUDIO EXPERIMENT · RIM UI
@@ -159,7 +159,7 @@ export default function RimTreeConceptPage() {
 
         {/* Center: Live Time / Seed Tag */}
         <div className="hidden lg:flex items-center gap-3 text-[10px] font-mono tracking-[0.2em] opacity-60">
-          <span className="w-1.5 h-1.5 rounded-full bg-[#D4B924] animate-pulse" />
+          <span className="w-1.5 h-1.5 rounded-full bg-[#FFC400] animate-pulse" />
           <span>SEED: 88491029</span>
           <span>·</span>
           <span>CHAOS: 08</span>
@@ -246,7 +246,7 @@ export default function RimTreeConceptPage() {
                 onClick={() => setActivePin(activePin === 1 ? null : 1)}
                 className="relative flex items-center justify-center w-7 h-7 rounded-full bg-black/80 dark:bg-white/90 text-white dark:text-black border border-white/40 shadow-xl cursor-pointer hover:scale-110 transition-transform"
               >
-                <span className="w-2 h-2 rounded-full bg-[#D4B924] animate-ping absolute" />
+                <span className="w-2 h-2 rounded-full bg-[#FFC400] animate-ping absolute" />
                 <span className="text-[10px] font-mono font-bold">01</span>
               </button>
               
@@ -256,7 +256,7 @@ export default function RimTreeConceptPage() {
                   activePin === 1 ? "opacity-100 scale-100" : "opacity-0 scale-95 pointer-events-none group-hover:opacity-100 group-hover:scale-100 group-hover:pointer-events-auto"
                 }`}
               >
-                <div className="text-[9px] font-mono font-bold uppercase tracking-wider text-[#D4B924] mb-1">
+                <div className="text-[9px] font-mono font-bold uppercase tracking-wider text-[#FFC400] mb-1">
                   TEXTURE LAYER
                 </div>
                 <div className="text-xs font-bold leading-tight mb-1">
@@ -404,13 +404,13 @@ export default function RimTreeConceptPage() {
           {/* Prompt Label & Copy Action */}
           <div className="flex items-center gap-3 shrink-0">
             <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-black/5 dark:bg-white/10 border border-black/10 dark:border-white/10 text-[10px] font-mono font-bold uppercase tracking-wider">
-              <Sparkles className="w-3 h-3 text-[#D4B924]" />
+              <Sparkles className="w-3 h-3 text-[#FFC400]" />
               <span>PROMPT + PNG</span>
             </div>
 
             <button
               onClick={handleCopyPrompt}
-              className="group flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#191919] text-white dark:bg-white dark:text-black text-[10px] font-mono tracking-wider uppercase transition-all hover:bg-[#D4B924] hover:text-black shadow-sm"
+              className="group flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#191919] text-white dark:bg-white dark:text-black text-[10px] font-mono tracking-wider uppercase transition-all hover:bg-[#FFC400] hover:text-black shadow-sm"
             >
               {copied ? (
                 <>
@@ -435,7 +435,7 @@ export default function RimTreeConceptPage() {
               }`}
               title="Click to toggle full prompt"
             >
-              <span className="font-bold text-[#D4B924] mr-2">/imagine:</span>
+              <span className="font-bold text-[#FFC400] mr-2">/imagine:</span>
               {selectedBranch.prompt}
             </p>
           </div>

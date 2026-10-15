@@ -108,7 +108,7 @@ export function SkullCanvas({ progress }: SkullCanvasProps) {
         // Exact original rich Asheron gold particle material with normal alpha blending
         material = new THREE.PointsMaterial({
           size: 0.013,
-          color: new THREE.Color("#D4B924"),
+          color: new THREE.Color("#FFC400"),
           transparent: true,
           opacity: 0,
           depthWrite: false,

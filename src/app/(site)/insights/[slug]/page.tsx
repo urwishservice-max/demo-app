@@ -8,8 +8,9 @@ import { LeadershipCard } from "@/components/ui/leadership-card"
 import { client } from "@/sanity/lib/client"
 import { projectId } from "@/sanity/env"
 
-export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
-  const insight = await getInsight(params.slug)
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const { slug } = await params
+  const insight = await getInsight(slug)
   if (!insight) {
     return { title: 'Not Found' }
   }
@@ -42,23 +43,48 @@ async function getInsight(slug: string) {
   }
 }
 
+import { urlForImage } from "@/sanity/lib/image"
+
 // PortableText Custom Components
 const ptComponents = {
   types: {
     image: ({ value }: any) => {
-      if (!value?.asset?._ref) {
+      if (!value?.asset?._ref && !value?.asset?.url) {
         return null
       }
+      const imgUrl = value?.asset?.url || urlForImage(value)
       return (
         <figure className="my-8">
-          {/* We'd normally use Sanity's image builder here, this is simplified */}
-          <div className="bg-slate-100 aspect-video rounded-sm overflow-hidden flex items-center justify-center text-slate-400">
-            [Image Component]
+          <div className="bg-slate-100 aspect-video rounded-sm overflow-hidden relative border border-slate-200">
+            {imgUrl ? (
+              <Image src={imgUrl} alt={value.alt || "Article illustration"} fill className="object-cover" />
+            ) : null}
           </div>
           {value.caption && <figcaption className="text-sm text-center text-slate-500 mt-2">{value.caption}</figcaption>}
         </figure>
       )
-    }
+    },
+    callout: ({ value }: any) => {
+      if (!value?.text) return null
+      return (
+        <aside className="my-8 bg-[#F7F9FB] border-l-[3px] border-[#B08D3F] p-6 rounded-r-sm">
+          {value.title && <h4 className="text-base font-semibold text-[#0B1B2B] mb-2">{value.title}</h4>}
+          <p className="text-slate-700 leading-relaxed text-sm md:text-base">{value.text}</p>
+        </aside>
+      )
+    },
+  },
+  marks: {
+    link: ({ children, value }: any) => (
+      <a href={value?.href} target="_blank" rel="noopener noreferrer" className="text-[#351779] underline underline-offset-4 hover:text-[#B08D3F] transition-colors">
+        {children}
+      </a>
+    ),
+    internalLink: ({ children, value }: any) => (
+      <Link href={`/insights/${value?.reference?.slug?.current || ''}`} className="text-[#351779] underline underline-offset-4 hover:text-[#B08D3F] transition-colors">
+        {children}
+      </Link>
+    ),
   },
   block: {
     h2: ({children}: any) => <h2 className="text-2xl font-semibold mt-12 mb-6 text-navy-900">{children}</h2>,
@@ -68,8 +94,11 @@ const ptComponents = {
   }
 }
 
-export default async function InsightArticlePage({ params }: { params: { slug: string } }) {
-  const insight = await getInsight(params.slug)
+import { ArticleJsonLd } from "@/components/seo/json-ld"
+
+export default async function InsightArticlePage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params
+  const insight = await getInsight(slug)
   
   if (!insight) {
     notFound()
@@ -77,6 +106,14 @@ export default async function InsightArticlePage({ params }: { params: { slug: s
   
   return (
     <div className="flex flex-col bg-white">
+      <ArticleJsonLd
+        title={insight.title}
+        description={insight.seoDescription || insight.excerpt}
+        slug={slug}
+        publishedAt={insight.publishedAt}
+        authorName={insight.author?.name}
+        heroImageUrl={insight.heroImageUrl}
+      />
       {/* ARTICLE HEADER */}
       <article className="pt-32 pb-16">
         <div className="container mx-auto px-6 max-w-4xl">
@@ -146,7 +183,7 @@ export default async function InsightArticlePage({ params }: { params: { slug: s
               name={insight.author.name}
               title={insight.author.title}
               biography={insight.author.biography}
-              image={insight.author.image ? 'imageUrl' : undefined} // Requires image builder integration in full implementation
+              image={insight.author.image ? urlForImage(insight.author.image) : undefined}
               linkedinUrl={insight.author.linkedinUrl}
             />
           </div>

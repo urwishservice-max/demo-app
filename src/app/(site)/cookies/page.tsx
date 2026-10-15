@@ -8,19 +8,19 @@ export const metadata: Metadata = {
 
 export default function CookiesPage() {
   return (
-    <div className="flex flex-col bg-white text-[#1A1A1A]">
-      <section className="bg-white text-[#111111] pt-28 pb-16 sm:pt-32 sm:pb-20 border-b border-[#E7E7E3]">
+    <div className="flex flex-col bg-[#F8F7F5] text-[#080808]">
+      <section className="bg-[#F8F7F5] text-[#080808] pt-28 pb-16 sm:pt-32 sm:pb-20 border-b border-[#E2E0DD]">
         <div className="container mx-auto px-6 max-w-4xl">
           <div className="flex items-center gap-2.5 mb-6">
-            <span className="h-2 w-2 rounded-full bg-[#CAC32C] flex-shrink-0" />
-            <span className="text-xs sm:text-sm font-bold uppercase tracking-[0.24em] text-[#1A1A1A]">
+            <span className="h-2 w-2 rounded-full bg-[#FFC400] flex-shrink-0" />
+            <span className="text-xs sm:text-sm font-bold uppercase tracking-[0.24em] text-[#080808]">
               Cookies & Tracking
             </span>
           </div>
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold leading-[1.08] tracking-tight text-[#111111] mb-6">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold leading-[1.08] tracking-tight text-[#080808] mb-6">
             Cookie Notice
           </h1>
-          <p className="text-base sm:text-lg text-[#6B6B6B] font-light leading-relaxed">
+          <p className="text-base sm:text-lg text-[#080808]/70 font-light leading-relaxed">
             Last updated: [DATE]
           </p>
         </div>

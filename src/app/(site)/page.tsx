@@ -7,6 +7,7 @@ import { WhatDrivesUs } from "@/components/home/what-drives-us"
 import { SectorDial } from "@/components/home/sector-dial"
 import { FaqAccordion } from "@/components/home/faq-accordion"
 import { ConsultationForm } from "@/components/home/consultation-form"
+import { OrganizationJsonLd } from "@/components/seo/json-ld"
 
 const industries = [
   {
@@ -38,221 +39,252 @@ const industries = [
 
 export default function Home() {
   return (
-    <div className="bg-[#202020] text-white">
+    <div
+      className="bg-[#080808] text-white selection:bg-[#FFC400] selection:text-[#080808]"
+      style={{
+        ["--color-primary" as any]: "#FFC400",
+        ["--color-primary-hover" as any]: "#E6B000",
+        ["--color-background" as any]: "#F8F7F5",
+        ["--bg-page" as any]: "#F8F7F5",
+        ["--azure" as any]: "#FFC400",
+        ["--azure-hover" as any]: "#E6B000",
+      }}
+    >
       
-      {/* ============== HERO SECTION (ACHERON Minimal Luxury Animated Canvas) ============== */}
+      {/* JSON-LD Structured Data */}
+      <OrganizationJsonLd />
+
+      {/* ============== HERO SECTION (ASHERON Minimal Luxury Animated Canvas) ============== */}
       <HeroSection />
 
       {/* Marquee Sector Slider */}
-      <div className="border-t border-[#E7E7E3]">
+      <div className="border-t border-[#E2E0DD]">
         <LogoSlider />
       </div>
 
-      {/* ============== WHAT GOT YOU HERE (Matching Phos Framed Statement Band) ============== */}
-      <section id="what-got-you-here" className="section--light sframe sframe--rails sframe--rule-top sframe--rule-bottom py-20 md:py-28 bg-[#FAFAF8] text-[#202020]">
-        <div className="wrap">
-          <div className="max-w-4xl mx-auto text-center">
-            <h2 className="t-title font-medium tracking-tight text-[#202020] mb-6">
-              What got you here <em className="!text-[#CAC32C]">won’t take you into the future.</em>
-            </h2>
-            <p className="t-lead text-[#6B6B6B] max-w-2xl mx-auto mb-10 text-base md:text-lg">
-              Strategy documents, technology pilots, and isolated AI experiments routinely stall at the point of operational execution. Acheron works at that critical inflection point: connecting executive intent with governed, accountable delivery.
-            </p>
-            <Link href="#contact" className="btn btn--dark !py-3.5 !px-8">
-              Start now
-            </Link>
+      {/* ============== SECTION — POSITIONING (§4.1 Specification) ============== */}
+      <section id="positioning" className="py-20 md:py-28 bg-[#F8F7F5] text-[#080808] border-b border-[#E2E0DD]">
+        <div className="max-w-5xl mx-auto px-6 sm:px-10 text-center flex flex-col items-center">
+          
+          <div className="flex items-center gap-3 mb-6">
+            <span className="w-2 h-2 rounded-full bg-[#FFC400]" />
+            <span className="font-mono text-xs font-bold uppercase tracking-[0.25em] text-[#351779]">
+              REALITY-TESTED ADVISORY
+            </span>
           </div>
+
+          <h2 className="text-3xl sm:text-5xl lg:text-6xl font-black uppercase tracking-tight text-[#080808] leading-[0.96] mb-6 [text-wrap:balance]">
+            Advisory that survives contact with reality.
+          </h2>
+
+          <p className="text-base sm:text-lg text-[#555555] max-w-3xl leading-relaxed mb-10 font-normal [text-wrap:balance]">
+            Strategy documents, technology pilots, and training programmes often stall at the point of execution. Asheron works at that point. We combine strategic design with governance, capability, and delivery discipline so that decisions taken at board level become operational practice — with clear ownership, controls, and evidence.
+          </p>
+
+          <Link
+            href="/contact"
+            className="group inline-flex items-center gap-3 px-8 py-3.5 bg-[#351779] text-white text-xs font-mono font-bold tracking-[0.2em] uppercase rounded-xs hover:bg-[#2B1263] transition-all duration-300 shadow-md"
+          >
+            <span>Request a Consultation</span>
+            <ArrowUpRight className="w-4 h-4 text-[#FFC400] transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
+          </Link>
         </div>
       </section>
 
-      {/* ============== FOUR PRACTICES (The Acheron Standard) ============== */}
-      <section id="phases" className="section--light sframe sframe--rails py-20 md:py-28 bg-[#FAFAF8] text-[#202020]">
-        <div className="wrap">
-          <PracticeTabs />
-        </div>
+      {/* ============== FOUR PRACTICES (The Asheron Standard - Full Screen) ============== */}
+      <section id="phases" className="w-full bg-[#FFFFFF] text-[#080808] border-b border-[#E2E0DD] overflow-hidden">
+        <PracticeTabs />
       </section>
 
       {/* ============== WHAT DRIVES US (Built for a higher standard) ============== */}
-      <section className="section--light sframe sframe--rails sframe--rule-top sframe--rule-bottom py-14 md:py-18 bg-[#FAFAF8] text-[#202020]">
-        <div className="wrap">
+      <section className="py-20 md:py-28 bg-[#F8F7F5] text-[#080808] border-b border-[#E2E0DD]">
+        <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16">
           <WhatDrivesUs />
         </div>
       </section>
 
-      {/* ============== SECTOR EXPERTISE (Automatic Left-Moving Slider) ============== */}
-      <section id="industries" className="py-8 md:py-10 bg-[#FAFAF8] text-[#202020]">
-        <div className="wrap">
+      {/* ============== SECTOR EXPERTISE (8 Sectors Rotary Dial) ============== */}
+      <section id="industries" className="py-16 md:py-24 bg-[#F8F7F5] text-[#080808] border-b border-[#E2E0DD]">
+        <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16">
           <SectorDial />
         </div>
       </section>
 
       {/* ============== LICENSED ADVISORY ACTIVITIES (Professional & Borderless) ============== */}
-      <section className="py-14 md:py-16 bg-[#FAFAF8] text-[#202020]">
-        <div className="wrap">
+      <section className="py-20 md:py-28 bg-[#F8F7F5] text-[#080808] border-b border-[#E2E0DD]">
+        <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16">
           {/* Institutional Top Bar */}
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-6 border-b border-[#E7E7E3] mb-8">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-6 border-b border-[#E2E0DD] mb-12">
             <div className="flex items-center gap-3">
-              <span className="h-2 w-2 rounded-full bg-[#CAC32C]" />
-              <span className="text-[11px] font-bold uppercase tracking-[0.24em] text-[#1A1A1A]">
+              <span className="w-2.5 h-2.5 rounded-full bg-[#FFC400]" />
+              <span className="font-mono text-xs font-bold uppercase tracking-[0.24em] text-[#080808]">
                 Licensed Advisory Activities
               </span>
-              <span className="text-xs text-[#8A8A85] hidden sm:inline">
+              <span className="font-mono text-xs text-[#8A8A85] hidden sm:inline">
                 · Department of Economy and Tourism
               </span>
             </div>
-            <span className="text-[11px] font-mono font-semibold uppercase tracking-wider text-[#70706C]">
+            <span className="font-mono text-xs font-bold uppercase tracking-wider text-[#351779]">
               Government of Dubai · UAE
             </span>
           </div>
 
-          {/* 4 Professional Editorial Columns (No Chunky Box Boundaries) */}
+          {/* 4 Professional Editorial Columns */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-10">
             {/* 01 */}
-            <div className="flex flex-col justify-between group">
+            <div className="flex flex-col justify-between group p-6 border border-[#E2E0DD] bg-white rounded-xs shadow-xs hover:border-[#351779] transition-all">
               <div>
-                <div className="flex items-center gap-2 mb-2">
-                  <span className="text-[11px] font-mono font-semibold text-[#8A8A85] uppercase tracking-wider">
+                <div className="flex items-center justify-between mb-3 font-mono">
+                  <span className="text-[10px] font-bold text-[#8A8A85] uppercase tracking-wider">
                     Licence
                   </span>
-                  <span className="text-xs font-mono font-bold text-[#1A1A1A]">
+                  <span className="text-xs font-bold text-[#351779]">
                     7020039
                   </span>
                 </div>
-                <h4 className="text-base sm:text-lg font-bold text-[#1A1A1A] tracking-tight group-hover:text-[#CAC32C] transition-colors mb-2">
+                <h4 className="text-lg font-black uppercase text-[#080808] tracking-tight group-hover:text-[#351779] transition-colors mb-2">
                   AI & Innovation
                 </h4>
-                <p className="text-xs sm:text-[13px] text-[#6B6B6B] leading-relaxed">
+                <p className="text-xs sm:text-sm text-[#555555] leading-relaxed mb-6 font-normal">
                   Autonomous systems, algorithmic verification, and governed executive architecture.
                 </p>
               </div>
-              <div className="mt-4 pt-3 border-t border-[#EAEAE5] flex items-center justify-between text-[11px] text-[#8A8A85]">
+              <div className="pt-3 border-t border-[#E2E0DD] flex items-center justify-between font-mono text-[11px] text-[#8A8A85]">
                 <span>Practice 01</span>
-                <span className="text-[#CAC32C] font-semibold">Active Status</span>
+                <span className="text-[#351779] font-bold uppercase">Active Status</span>
               </div>
             </div>
 
             {/* 02 */}
-            <div className="flex flex-col justify-between group">
+            <div className="flex flex-col justify-between group p-6 border border-[#E2E0DD] bg-white rounded-xs shadow-xs hover:border-[#351779] transition-all">
               <div>
-                <div className="flex items-center gap-2 mb-2">
-                  <span className="text-[11px] font-mono font-semibold text-[#8A8A85] uppercase tracking-wider">
+                <div className="flex items-center justify-between mb-3 font-mono">
+                  <span className="text-[10px] font-bold text-[#8A8A85] uppercase tracking-wider">
                     Licence
                   </span>
-                  <span className="text-xs font-mono font-bold text-[#1A1A1A]">
+                  <span className="text-xs font-bold text-[#351779]">
                     7020003
                   </span>
                 </div>
-                <h4 className="text-base sm:text-lg font-bold text-[#1A1A1A] tracking-tight group-hover:text-[#CAC32C] transition-colors mb-2">
+                <h4 className="text-lg font-black uppercase text-[#080808] tracking-tight group-hover:text-[#351779] transition-colors mb-2">
                   Management Consultancies
                 </h4>
-                <p className="text-xs sm:text-[13px] text-[#6B6B6B] leading-relaxed">
+                <p className="text-xs sm:text-sm text-[#555555] leading-relaxed mb-6 font-normal">
                   Target operating model design, corporate governance, and executive board advisory.
                 </p>
               </div>
-              <div className="mt-4 pt-3 border-t border-[#EAEAE5] flex items-center justify-between text-[11px] text-[#8A8A85]">
+              <div className="pt-3 border-t border-[#E2E0DD] flex items-center justify-between font-mono text-[11px] text-[#8A8A85]">
                 <span>Practice 02</span>
-                <span className="text-[#CAC32C] font-semibold">Active Status</span>
+                <span className="text-[#351779] font-bold uppercase">Active Status</span>
               </div>
             </div>
 
             {/* 03 */}
-            <div className="flex flex-col justify-between group">
+            <div className="flex flex-col justify-between group p-6 border border-[#E2E0DD] bg-white rounded-xs shadow-xs hover:border-[#351779] transition-all">
               <div>
-                <div className="flex items-center gap-2 mb-2">
-                  <span className="text-[11px] font-mono font-semibold text-[#8A8A85] uppercase tracking-wider">
+                <div className="flex items-center justify-between mb-3 font-mono">
+                  <span className="text-[10px] font-bold text-[#8A8A85] uppercase tracking-wider">
                     Licence
                   </span>
-                  <span className="text-xs font-mono font-bold text-[#1A1A1A]">
+                  <span className="text-xs font-bold text-[#351779]">
                     7020008
                   </span>
                 </div>
-                <h4 className="text-base sm:text-lg font-bold text-[#1A1A1A] tracking-tight group-hover:text-[#CAC32C] transition-colors mb-2">
+                <h4 className="text-lg font-black uppercase text-[#080808] tracking-tight group-hover:text-[#351779] transition-colors mb-2">
                   Human Resources & Capability
                 </h4>
-                <p className="text-xs sm:text-[13px] text-[#6B6B6B] leading-relaxed">
+                <p className="text-xs sm:text-sm text-[#555555] leading-relaxed mb-6 font-normal">
                   Workforce skills impact mapping, role-specific fluency, and leadership enablement.
                 </p>
               </div>
-              <div className="mt-4 pt-3 border-t border-[#EAEAE5] flex items-center justify-between text-[11px] text-[#8A8A85]">
+              <div className="pt-3 border-t border-[#E2E0DD] flex items-center justify-between font-mono text-[11px] text-[#8A8A85]">
                 <span>Practice 03</span>
-                <span className="text-[#CAC32C] font-semibold">Active Status</span>
+                <span className="text-[#351779] font-bold uppercase">Active Status</span>
               </div>
             </div>
 
             {/* 04 */}
-            <div className="flex flex-col justify-between group">
+            <div className="flex flex-col justify-between group p-6 border border-[#E2E0DD] bg-white rounded-xs shadow-xs hover:border-[#351779] transition-all">
               <div>
-                <div className="flex items-center gap-2 mb-2">
-                  <span className="text-[11px] font-mono font-semibold text-[#8A8A85] uppercase tracking-wider">
+                <div className="flex items-center justify-between mb-3 font-mono">
+                  <span className="text-[10px] font-bold text-[#8A8A85] uppercase tracking-wider">
                     Licence
                   </span>
-                  <span className="text-xs font-mono font-bold text-[#1A1A1A]">
+                  <span className="text-xs font-bold text-[#351779]">
                     7020020
                   </span>
                 </div>
-                <h4 className="text-base sm:text-lg font-bold text-[#1A1A1A] tracking-tight group-hover:text-[#CAC32C] transition-colors mb-2">
+                <h4 className="text-lg font-black uppercase text-[#080808] tracking-tight group-hover:text-[#351779] transition-colors mb-2">
                   Project Development
                 </h4>
-                <p className="text-xs sm:text-[13px] text-[#6B6B6B] leading-relaxed">
+                <p className="text-xs sm:text-sm text-[#555555] leading-relaxed mb-6 font-normal">
                   Stage-gate delivery assurance, capital feasibility, and PMO programme governance.
                 </p>
               </div>
-              <div className="mt-4 pt-3 border-t border-[#EAEAE5] flex items-center justify-between text-[11px] text-[#8A8A85]">
+              <div className="pt-3 border-t border-[#E2E0DD] flex items-center justify-between font-mono text-[11px] text-[#8A8A85]">
                 <span>Practice 04</span>
-                <span className="text-[#CAC32C] font-semibold">Active Status</span>
+                <span className="text-[#351779] font-bold uppercase">Active Status</span>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* ============== FAQs (Matching Phos Accordion) ============== */}
-      <section className="section--dark sframe sframe--dark sframe--rails py-24 md:py-32 bg-[#202020]">
-        <div className="wrap">
-          <div className="max-w-4xl mx-auto">
-            <h2 className="t-h3 text-white font-bold mb-12">
-              Frequently Asked Questions
-            </h2>
-            <FaqAccordion />
+      {/* ============== FAQs (Matching Architectural Dark Editorial Layout) ============== */}
+      <section className="py-24 md:py-32 bg-[#080808] text-white border-t border-white/10">
+        <div className="max-w-4xl mx-auto px-6 sm:px-10">
+          <div className="flex items-center gap-3 mb-4 font-mono text-xs">
+            <span className="text-[#FFC400] font-bold">FAQ / 06</span>
+            <span className="w-8 h-[1px] bg-white/20" />
+            <span className="text-white/50 uppercase tracking-widest">DISCOURSE</span>
           </div>
+          <h2 className="text-3xl sm:text-5xl font-black uppercase tracking-tight text-white mb-12">
+            Frequently Asked Questions<span className="text-[#FFC400]">.</span>
+          </h2>
+          <FaqAccordion />
         </div>
       </section>
 
-      {/* ============== CONTACT FORM (Matching Phos 2-Step Form) ============== */}
-      <section id="contact" className="section--dark sframe sframe--dark sframe--rails py-24 md:py-32 bg-[#1b1b1b] border-t border-white/10">
-        <div className="wrap">
-          <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_1fr] gap-14 items-start">
+      {/* ============== CONTACT FORM (Clean Editorial Dual Column) ============== */}
+      <section id="contact" className="py-24 md:py-32 bg-[#080808] text-white border-t border-white/10 relative overflow-hidden">
+        {/* Subtle Ambient Radial Glow */}
+        <div className="absolute top-1/2 left-1/4 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[400px] bg-radial from-[#FFC400]/10 via-[#351779]/08 to-transparent blur-3xl pointer-events-none opacity-60" />
+
+        <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
             
-            {/* Left Intro */}
-            <div>
-              <span className="text-xs font-semibold uppercase tracking-widest text-[#CAC32C] block mb-4">
-                Schedule a Consultation
-              </span>
-              <h2 className="t-title text-white font-medium leading-tight mb-6">
-                The fastest way to know whether we’re the right fit, <em>is a conversation.</em>
+            {/* Left Column: Editorial Summary */}
+            <div className="lg:col-span-5">
+              <div className="flex items-center gap-3 mb-4 font-mono text-xs">
+                <span className="text-[#FFC400] font-bold uppercase tracking-widest">SCHEDULE A CONSULTATION</span>
+              </div>
+
+              <h2 className="text-3xl sm:text-5xl font-black uppercase tracking-tight text-white leading-tight mb-6">
+                The fastest way to know whether we’re the right fit, <span className="text-[#351779] bg-[#FFC400] px-2 inline-block">is a conversation.</span>
               </h2>
-              <p className="t-lead text-white/70 max-w-lg mb-8 text-base md:text-lg">
+
+              <p className="text-sm sm:text-base text-white/70 leading-relaxed font-light mb-8">
                 We spend thirty minutes understanding your operational priorities and regulatory landscape. If we can create immediate leverage, we will show you exactly where.
               </p>
               
-              <div className="space-y-4 pt-6 border-t border-white/10 text-sm text-white/60">
+              <div className="space-y-4 pt-6 border-t border-white/10 text-xs sm:text-sm font-mono text-white/60">
                 <div className="flex items-center gap-3">
-                  <div className="h-2 w-2 rounded-full bg-[#CAC32C]" />
+                  <div className="h-2 w-2 rounded-full bg-[#FFC400]" />
                   <span>30 minutes, structured, no presentation deck</span>
                 </div>
                 <div className="flex items-center gap-3">
-                  <div className="h-2 w-2 rounded-full bg-[#CAC32C]" />
+                  <div className="h-2 w-2 rounded-full bg-[#FFC400]" />
                   <span>Senior Advisory Partner attendance</span>
                 </div>
                 <div className="flex items-center gap-3">
-                  <div className="h-2 w-2 rounded-full bg-[#CAC32C]" />
+                  <div className="h-2 w-2 rounded-full bg-[#FFC400]" />
                   <span>Non-disclosure & strict client confidentiality</span>
                 </div>
               </div>
             </div>
 
-            {/* Right 2-Step Form */}
-            <div>
+            {/* Right Column: 2-Step Form */}
+            <div className="lg:col-span-7">
               <ConsultationForm />
             </div>
 

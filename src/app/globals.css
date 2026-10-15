@@ -1,55 +1,58 @@
 @import "tailwindcss";
 
 @theme {
-  --color-primary: #CAC32C;
-  --color-primary-hover: #B5AE22;
-  --color-primary-dark: #202020;
-  --color-secondary-gray: #DCDCDC;
-  --color-background: #FAFAF8;
+  --color-primary: #FFC400;
+  --color-primary-hover: #E6B000;
+  --color-cta: #351779;
+  --color-cta-hover: #2B1263;
+  --color-primary-dark: #080808;
+  --color-secondary-gray: #E2E0DD;
+  --color-background: #F8F7F5;
   --color-surface: #FFFFFF;
   --color-text-muted: #6B6B6B;
-  --color-border: #E7E7E3;
-  --color-hover-accent: #B5AE22;
+  --color-border: #E2E0DD;
+  --color-hover-accent: #FFC400;
 
   /* Aliases for backward compatibility with existing component classes */
-  --color-azure: #CAC32C;
-  --color-ink: #202020;
-  --color-title: #202020;
+  --color-azure: #FFC400;
+  --color-ink: #080808;
+  --color-title: #080808;
   --color-subtitle: #6B6B6B;
   --color-add: #6B6B6B;
-  --color-navy-900: #0F172A;
-  --color-gold-500: #CAC32C;
-  --color-gold-300: #E6DE44;
-  --color-gold-400: #D8D035;
+  --color-navy-900: #351779;
+  --color-gold-500: #FFC400;
+  --color-gold-300: #FFE082;
+  --color-gold-400: #FFD54F;
 
   --font-sans: var(--font-dm-sans), "DM Sans", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
   --font-inter: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
 }
 
 :root {
-  /* ACHERON Brand Color Palette */
-  --primary-brand: #CAC32C;
-  --hover-accent: #B5AE22;
-  --primary-dark: #202020;
-  --secondary-gray: #DCDCDC;
-  --bg-page: #FAFAF8;
+  /* ASHERON Brand Color Palette (from official image) */
+  --primary-brand: #FFC400;
+  --cta-purple: #351779;
+  --hover-accent: #E6B000;
+  --primary-dark: #080808;
+  --secondary-gray: #E2E0DD;
+  --bg-page: #F8F7F5;
   --surface: #FFFFFF;
   --text-muted: #6B6B6B;
-  --border-divider: #E7E7E3;
+  --border-divider: #E2E0DD;
 
   /* Core UI variables */
-  --azure: #CAC32C;
-  --azure-hover: #B5AE22;
-  --azure-glow: rgba(202, 195, 44, 0.45);
-  --ink: #202020;
-  --deep: #171717;
+  --azure: #FFC400;
+  --azure-hover: #E6B000;
+  --azure-glow: rgba(255, 196, 0, 0.45);
+  --ink: #080808;
+  --deep: #080808;
   --ghost: #FFFFFF;
-  --title: #202020;
-  --bg-tint: #FAFAF8;
+  --title: #080808;
+  --bg-tint: #F8F7F5;
   --subtitle: #6B6B6B;
   --add: #6B6B6B;
-  --disabled: #DCDCDC;
-  --line-light: #E7E7E3;
+  --disabled: #E2E0DD;
+  --line-light: #E2E0DD;
   --line-dark: rgba(255, 255, 255, 0.12);
   --muted-dark: rgba(255, 255, 255, 0.65);
 
@@ -239,17 +242,17 @@ em {
 }
 
 .btn--primary {
-  background: var(--primary-brand);
-  color: var(--primary-dark);
+  background: var(--cta-purple);
+  color: #ffffff;
   font-weight: 700;
   border: 1px solid transparent;
-  box-shadow: 0 4px 18px rgba(202, 195, 44, 0.3);
+  box-shadow: 0 4px 18px rgba(53, 23, 121, 0.3);
 }
 
 .btn--primary:hover {
   transform: translateY(-1px);
-  background: var(--hover-accent);
-  box-shadow: 0 6px 28px rgba(181, 174, 34, 0.45);
+  background: #2B1263;
+  box-shadow: 0 6px 28px rgba(53, 23, 121, 0.45);
 }
 
 .btn--dark {
@@ -285,7 +288,7 @@ em {
 
 .btn--outline:hover {
   background: var(--bg-tint);
-  border-color: var(--primary-brand);
+  border-color: var(--cta-purple);
 }
 
 /* Sections */
@@ -345,7 +348,7 @@ em {
   height: 8px;
   border-radius: 50%;
   background: var(--primary-brand);
-  box-shadow: 0 0 10px rgba(202, 195, 44, 0.6);
+  box-shadow: 0 0 10px rgba(255, 196, 0, 0.6);
   display: inline-block;
 }
 
@@ -355,11 +358,11 @@ em {
 
 @keyframes dot-pulse {
   0%, 100% {
-    box-shadow: 0 0 8px rgba(202, 195, 44, 0.6);
+    box-shadow: 0 0 8px rgba(255, 196, 0, 0.6);
     transform: scale(1);
   }
   50% {
-    box-shadow: 0 0 18px rgba(202, 195, 44, 0.95);
+    box-shadow: 0 0 18px rgba(255, 196, 0, 0.95);
     transform: scale(1.15);
   }
 }
@@ -398,3 +401,16 @@ em {
 .skip-link:focus {
   transform: translateY(0);
 }
+
+/* WCAG 2.2 AA: Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+

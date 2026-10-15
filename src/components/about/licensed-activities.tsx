@@ -26,7 +26,7 @@ const activities: ActivityItem[] = [
     imageSrc: "/crop_base.png",
     line1: "LICENSED",
     line2: "ACTIVITIES",
-    secondaryColor: "#CAC32C",
+    secondaryColor: "#FFC400",
     isBase: true,
   },
   // 1: Red Light
@@ -79,7 +79,7 @@ const activities: ActivityItem[] = [
     imageSrc: "/crop_all.png",
     line1: "LICENSED",
     line2: "ACTIVITIES",
-    secondaryColor: "#CAC32C",
+    secondaryColor: "#FFC400",
     isAll: true,
   },
 ]
@@ -269,7 +269,7 @@ export function LicensedActivities() {
                     <div className="pt-2">
                       <Link
                         href="/contact"
-                        className="inline-flex items-center justify-center px-5 py-2 sm:px-6 sm:py-2.5 rounded-full text-xs sm:text-sm font-bold text-neutral-900 bg-[#CAC32C] hover:bg-[#B5AE22] transition-colors shadow-xs"
+                        className="inline-flex items-center justify-center px-5 py-2 sm:px-6 sm:py-2.5 rounded-full text-xs sm:text-sm font-bold text-white bg-[#351779] hover:bg-[#2B1263] transition-colors shadow-xs"
                       >
                         Request a Consultation
                       </Link>

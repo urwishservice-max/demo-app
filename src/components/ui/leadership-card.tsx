@@ -1,5 +1,4 @@
 import Image from "next/image"
-import { type ReactNode } from "react"
 
 export interface LeadershipCardProps {
   name: string
@@ -7,9 +6,21 @@ export interface LeadershipCardProps {
   biography: string
   image?: string
   linkedinUrl?: string
+  email?: string
+  twitterUrl?: string
+  websiteUrl?: string
 }
 
-export function LeadershipCard({ name, title, biography, image, linkedinUrl }: LeadershipCardProps) {
+export function LeadershipCard({
+  name,
+  title,
+  biography,
+  image,
+  linkedinUrl,
+  email,
+  twitterUrl,
+  websiteUrl,
+}: LeadershipCardProps) {
   if (!name) return null // Do not render if no profile info exists
 
   return (
@@ -37,16 +48,46 @@ export function LeadershipCard({ name, title, biography, image, linkedinUrl }: L
               <p key={idx}>{para}</p>
             ))}
           </div>
-          {linkedinUrl && linkedinUrl !== "[LINKEDIN URL]" && (
-            <a 
-              href={linkedinUrl} 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="text-sm font-semibold text-navy-900 hover:text-gold-500 transition-colors mt-auto inline-flex w-fit"
-            >
-              LinkedIn Profile &rarr;
-            </a>
-          )}
+          <div className="flex flex-wrap items-center gap-4 mt-auto pt-2">
+            {linkedinUrl && linkedinUrl !== "[LINKEDIN URL]" && (
+              <a 
+                href={linkedinUrl} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-sm font-semibold text-navy-900 hover:text-gold-500 transition-colors inline-flex items-center gap-1"
+              >
+                LinkedIn &rarr;
+              </a>
+            )}
+            {twitterUrl && (
+              <a 
+                href={twitterUrl} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-sm font-semibold text-navy-900 hover:text-gold-500 transition-colors inline-flex items-center gap-1"
+              >
+                X / Twitter &rarr;
+              </a>
+            )}
+            {websiteUrl && (
+              <a 
+                href={websiteUrl} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-sm font-semibold text-navy-900 hover:text-gold-500 transition-colors inline-flex items-center gap-1"
+              >
+                Website &rarr;
+              </a>
+            )}
+            {email && (
+              <a 
+                href={`mailto:${email}`}
+                className="text-sm font-semibold text-navy-900 hover:text-gold-500 transition-colors inline-flex items-center gap-1"
+              >
+                {email} &rarr;
+              </a>
+            )}
+          </div>
         </div>
       </div>
     </div>

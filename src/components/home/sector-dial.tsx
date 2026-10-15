@@ -2,7 +2,21 @@
 
 import { useState, useEffect, useRef, useCallback } from "react"
 import Link from "next/link"
-import { X, ChevronUp, ChevronDown, RotateCw, ArrowRight } from "lucide-react"
+import { X, ChevronUp, ChevronDown, RotateCw, ArrowRight, ArrowUpRight } from "lucide-react"
+
+/**
+ * ASHERON SECTOR EXPERTISE (8 SECTORS ROTARY DIAL & DIRECTORY)
+ * 
+ * Configured with all 8 authentic industries:
+ * 1. Aviation & Aerospace
+ * 2. FinTech & Banking
+ * 3. Healthcare & Life Sciences
+ * 4. Real Estate & Family Groups
+ * 5. Supply Chain & Logistics
+ * 6. Government & Public Sector
+ * 7. Manufacturing & Industrial
+ * 8. Retail & Consumer Tech
+ */
 
 const sectors = [
   {
@@ -16,7 +30,7 @@ const sectors = [
   {
     step: "02",
     id: "banking",
-    name: "Banking & Financial Services",
+    name: "FinTech & Banking",
     subtitle: "CBUAE regulatory alignment and sovereign data perimeter governance",
     tag: "Licence 7020003 · Quantitative Assurance",
     href: "/industries",
@@ -31,17 +45,17 @@ const sectors = [
   },
   {
     step: "04",
-    id: "interaction",
-    name: "Interaction",
-    subtitle: "Persistent information and multi-touch surface",
+    id: "realestate",
+    name: "Real Estate & Family Groups",
+    subtitle: "Governance, decision rights, and stage-gate capital delivery as groups institutionalise",
     tag: "Licence 7020020 · PMO Stage-Gate Assurance",
     href: "/industries",
   },
   {
     step: "05",
     id: "supply-chain",
-    name: "Supply Chain & Logistics",
-    subtitle: "Cross-border clearance and predictive multimodal transport networks",
+    name: "Logistics & Supply Chain",
+    subtitle: "Cross-border clearance, counterparty risk, and predictive multimodal transport networks",
     tag: "Licence 7020039 · Autonomous Dispatch",
     href: "/industries",
   },
@@ -53,13 +67,28 @@ const sectors = [
     tag: "Licence 7020003 · Sovereign Governance",
     href: "/industries",
   },
+  {
+    step: "07",
+    id: "manufacturing",
+    name: "Manufacturing & Industrial",
+    subtitle: "Operational technology integration, production governance, and supply continuity",
+    tag: "Licence 7020020 · Industrial Assurance",
+    href: "/industries",
+  },
+  {
+    step: "08",
+    id: "retail",
+    name: "Retail & Consumer Tech",
+    subtitle: "Omnichannel customer data governance, pricing algorithmic audits, and automated fulfilment",
+    tag: "Licence 7020008 · Consumer Assurance",
+    href: "/industries",
+  },
 ]
 
 export function SectorDial() {
-  const stepAngle = 60 // 360 / 6 = 60 deg each
+  const stepAngle = 45 // 360 / 8 = 45 deg each
 
-  // Start with 06 (index 5) or 04 (index 3) at 3 o'clock stop
-  // Initial angle for index 5 is -5 * 60 = -300 deg
+  // Start with 06 (index 5) at 3 o'clock stop
   const [rotation, setRotation] = useState(-5 * stepAngle)
   const [isDragging, setIsDragging] = useState(false)
   const [isPaused, setIsPaused] = useState(false)
@@ -82,8 +111,8 @@ export function SectorDial() {
   const dialToSector = (targetIdx: number) => {
     const currentIdx = ((snappedStep % sectors.length) + sectors.length) % sectors.length
     let diff = targetIdx - currentIdx
-    if (diff > 3) diff -= sectors.length
-    if (diff < -3) diff += sectors.length
+    if (diff > 4) diff -= sectors.length
+    if (diff < -4) diff += sectors.length
     dialToStep(snappedStep + diff)
   }
 
@@ -177,7 +206,7 @@ export function SectorDial() {
 
     const timer = setInterval(() => {
       setRotation((prev) => prev - stepAngle)
-    }, 4000)
+    }, 4500)
 
     return () => clearInterval(timer)
   }, [isPaused, isDragging, stepAngle])
@@ -201,49 +230,50 @@ export function SectorDial() {
       onTouchEnd={handleTouchEnd}
       className="relative w-full max-w-6xl mx-auto min-h-[500px] text-[#202020] select-none flex flex-col justify-between p-4 sm:p-6 md:p-8"
     >
-      {/* 1. Header (Matching Reference Screenshot Top-Left: ACHERON / Sector Expertise) */}
-      <div className="relative z-30 flex items-center justify-between w-full pb-4">
+      {/* 1. Header (ASHERON / Sector Expertise) */}
+      <div className="relative z-30 flex items-center justify-between w-full pb-4 border-b border-[#E2E0DD]">
         <div className="flex items-center gap-3">
-          <span className="text-sm font-extrabold tracking-[0.25em] uppercase text-[#1A1A1A]">
-            ACHERON
+          <span className="w-2.5 h-2.5 rounded-full bg-[#FFC400] animate-pulse" />
+          <span className="font-mono text-xs font-bold tracking-[0.25em] uppercase text-[#080808]">
+            ASHERON
           </span>
-          <span className="text-xs text-[#8A8A85] font-medium hidden sm:inline">
-            / Sector Expertise
+          <span className="text-[11px] font-mono text-[#8A8A85] tracking-[0.2em] uppercase pl-3 border-l border-[#E2E0DD] hidden sm:inline">
+            SECTOR EXPERTISE · 08 INDUSTRIES
           </span>
         </div>
 
-        {/* Top-Right Stepper Controls */}
+        {/* Stepper Controls */}
         <div className="flex items-center gap-3">
           <div className="flex items-center gap-1">
             <button
               onClick={handlePrev}
-              aria-label="Previous"
-              className="w-7 h-7 rounded-full bg-[#EAEAE5] hover:bg-[#DCDCD7] text-[#202020] flex items-center justify-center transition-all duration-200 active:scale-95 cursor-pointer"
+              aria-label="Previous Sector"
+              className="w-7 h-7 rounded-xs bg-[#E2E0DD] hover:bg-[#351779] hover:text-white text-[#080808] flex items-center justify-center transition-all duration-200 cursor-pointer"
             >
               <ChevronUp className="w-3.5 h-3.5" />
             </button>
             <button
               onClick={handleNext}
-              aria-label="Next"
-              className="w-7 h-7 rounded-full bg-[#CAC32C] hover:bg-[#B5AE22] text-[#202020] flex items-center justify-center transition-all duration-200 active:scale-95 cursor-pointer"
+              aria-label="Next Sector"
+              className="w-7 h-7 rounded-xs bg-[#FFC400] hover:bg-[#351779] hover:text-white text-[#080808] flex items-center justify-center transition-all duration-200 cursor-pointer"
             >
               <ChevronDown className="w-3.5 h-3.5" />
             </button>
           </div>
           <button
             onClick={() => dialToStep(5)}
-            aria-label="Reset to 06"
-            className="w-7 h-7 rounded-full flex items-center justify-center text-[#888880] hover:text-[#1A1A1A] transition-colors cursor-pointer"
+            aria-label="Reset to Government Sector"
+            className="w-7 h-7 rounded-xs flex items-center justify-center text-[#888880] hover:text-[#080808] transition-colors cursor-pointer"
           >
             <X className="w-4 h-4 stroke-[1.5]" />
           </button>
         </div>
       </div>
 
-      {/* 2. Main 2-Column Responsive Layout (NO Clipping, NO Overlap) */}
-      <div className="w-full flex-1 grid grid-cols-1 lg:grid-cols-12 items-center gap-8 my-auto py-4">
+      {/* 2. Main 2-Column Responsive Layout */}
+      <div className="w-full flex-1 grid grid-cols-1 lg:grid-cols-12 items-center gap-8 my-auto py-6">
         
-        {/* Left Column (5 cols): The Rotary Dial exactly as in reference */}
+        {/* Left Column (6 cols): The Rotary Dial */}
         <div className="lg:col-span-6 flex items-center justify-center lg:justify-end">
           <div
             ref={dialRef}
@@ -265,7 +295,7 @@ export function SectorDial() {
                 cx={center}
                 cy={center}
                 r={dialRadius}
-                stroke="#DCDCD7"
+                stroke="#E2E0DD"
                 strokeWidth="1.5"
                 strokeDasharray="4 6"
               />
@@ -274,8 +304,8 @@ export function SectorDial() {
               <circle
                 cx={center + dialRadius}
                 cy={center}
-                r="3.5"
-                fill="#1A1A1A"
+                r="4.5"
+                fill="#351779"
               />
             </svg>
 
@@ -299,7 +329,7 @@ export function SectorDial() {
 
                 // Angle at 3 o'clock stop
                 const currentAngleAtStop = (((itemAngle + rotation) % 360) + 540) % 360 - 180
-                const isAtStop = Math.abs(currentAngleAtStop) < 15
+                const isAtStop = Math.abs(currentAngleAtStop) < 12
 
                 return (
                   <div
@@ -323,8 +353,8 @@ export function SectorDial() {
                       <span
                         className={`font-mono transition-all duration-300 block select-none ${
                           isAtStop
-                            ? "text-4xl sm:text-5xl font-extrabold text-[#1A1A1A] scale-110 tracking-tight"
-                            : "text-2xl sm:text-3xl font-extrabold text-[#C8C8C2] group-hover:text-[#666660] opacity-50 group-hover:opacity-90"
+                            ? "text-4xl sm:text-5xl font-black text-[#080808] scale-110 tracking-tight"
+                            : "text-2xl sm:text-3xl font-bold text-[#C8C8C2] group-hover:text-[#666660] opacity-40 group-hover:opacity-90"
                         }`}
                       >
                         {sec.step}
@@ -338,37 +368,41 @@ export function SectorDial() {
         </div>
 
         {/* Right Column (6 cols): Active Sector Title & Details */}
-        <div className="lg:col-span-6 flex flex-col justify-center pl-0 lg:pl-6 max-w-xl">
+        <div className="lg:col-span-6 flex flex-col justify-center pl-0 lg:pl-8 max-w-xl">
           <div key={activeSector.id} className="transition-all duration-300">
             {/* Tag */}
-            <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-[#888880] block mb-2">
-              {activeSector.tag}
-            </span>
+            <div className="flex items-center gap-2 mb-3">
+              <span className="font-mono text-xs font-bold text-[#FFC400]">{activeSector.step}</span>
+              <span className="w-6 h-[1px] bg-[#E2E0DD]" />
+              <span className="text-[11px] font-mono font-bold uppercase tracking-[0.2em] text-[#351779]">
+                {activeSector.tag}
+              </span>
+            </div>
 
             {/* Title */}
-            <h3 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-[#1A1A1A] leading-tight">
+            <h3 className="text-3xl sm:text-4xl md:text-5xl font-black uppercase tracking-tight text-[#080808] leading-tight">
               {activeSector.name}
             </h3>
 
             {/* Subtitle */}
-            <p className="text-xs sm:text-sm md:text-[15px] text-[#7A7A75] font-normal tracking-wide mt-2 leading-relaxed">
+            <p className="text-sm md:text-base text-[#555555] font-normal mt-3 leading-relaxed">
               {activeSector.subtitle}
             </p>
 
             {/* Action Links */}
-            <div className="mt-6 flex items-center gap-4">
+            <div className="mt-8 flex flex-wrap items-center gap-4">
               <Link
                 href={activeSector.href}
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#CAC32C] hover:bg-[#B5AE22] text-[#202020] font-semibold text-xs sm:text-sm transition-all duration-200 shadow-sm"
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-xs bg-[#351779] hover:bg-[#2B1263] text-white font-mono text-xs font-bold tracking-wider uppercase transition-all duration-200 shadow-sm"
               >
-                Explore Practice
-                <ArrowRight className="w-3.5 h-3.5" />
+                <span>EXPLORE SECTOR</span>
+                <ArrowUpRight className="w-3.5 h-3.5 text-[#FFC400]" />
               </Link>
               <Link
-                href="#contact"
-                className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-[#202020] hover:text-[#CAC32C] transition-colors"
+                href="/contact"
+                className="inline-flex items-center gap-1.5 font-mono text-xs font-bold uppercase text-[#080808] hover:text-[#351779] transition-colors"
               >
-                Book confidential call →
+                <span>BOOK CONFIDENTIAL CALL →</span>
               </Link>
             </div>
           </div>
@@ -376,28 +410,25 @@ export function SectorDial() {
 
       </div>
 
-      {/* 3. Footer (Matching Reference Screenshot Bottom-Left: Licenced by — Government of Dubai) */}
-      <div className="relative z-30 flex flex-col sm:flex-row items-start sm:items-center justify-between w-full pt-4 text-[11px] sm:text-xs text-[#8A8A85] gap-3">
-        <div className="flex items-center gap-2">
+      {/* 3. Footer */}
+      <div className="relative z-30 flex flex-col sm:flex-row items-start sm:items-center justify-between w-full pt-4 border-t border-[#E2E0DD] text-[11px] sm:text-xs text-[#8A8A85] gap-3">
+        <div className="flex items-center gap-2 font-mono">
           <span>Licenced by</span>
           <span className="w-3 h-[1px] bg-[#B5B5AF]" />
-          <span className="font-semibold text-[#1A1A1A]">Government of Dubai</span>
+          <span className="font-bold text-[#080808] uppercase">Government of Dubai · Licence 7020039</span>
         </div>
 
-        <div className="hidden lg:flex items-center gap-1.5 text-[#999994]">
-          <RotateCw className="w-3 h-3 text-[#CAC32C]" />
+        <div className="hidden lg:flex items-center gap-1.5 font-mono text-[#999994] text-[11px]">
+          <RotateCw className="w-3 h-3 text-[#FFC400]" />
           <span>Spin the rotary dial or scroll to navigate</span>
         </div>
 
-        <div className="flex items-center gap-3 sm:gap-4 self-end sm:self-auto">
-          <span className="text-[10px] sm:text-[11px] text-[#A0A09B] hidden md:inline">
-            © 2026 Acheron Advisory Corporation. All rights reserved.
-          </span>
+        <div className="flex items-center gap-3 sm:gap-4 self-end sm:self-auto font-mono">
           <Link
-            href="#contact"
-            className="inline-flex items-center justify-center px-5 py-2 rounded-full bg-[#5D45FD] hover:bg-[#4E35EB] text-white font-semibold text-xs transition-all duration-200 shadow-sm active:scale-95"
+            href="/contact"
+            className="inline-flex items-center justify-center px-4 py-2 rounded-xs bg-[#351779] hover:bg-[#2B1263] text-white font-bold text-xs uppercase tracking-wider transition-all duration-200 shadow-xs"
           >
-            Apply Now
+            REQUEST A CONSULTATION ↗
           </Link>
         </div>
       </div>

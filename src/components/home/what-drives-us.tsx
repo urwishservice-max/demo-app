@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { Shield, BarChart3, Minus, Plus } from "lucide-react"
+import { Shield, BarChart3 } from "lucide-react"
 
 const values = [
   {
@@ -46,13 +46,13 @@ export function WhatDrivesUs() {
             <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.24em] text-[#70706C]">
               What drives us
             </span>
-            <div className="h-[1px] w-24 bg-[#DCDCD7]" />
+            <div className="h-[1px] w-24 bg-[#E2E0DD]" />
           </div>
 
           {/* Heading */}
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-[#1A1A1A] leading-[1.08]">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-[#080808] leading-[1.08]">
             Built for a<br />
-            higher standard<span className="text-[#CAC32C]">.</span>
+            higher standard<span className="text-[#FFC400]">.</span>
           </h2>
         </div>
 
@@ -67,7 +67,7 @@ export function WhatDrivesUs() {
           <p className="text-[10px] font-bold uppercase tracking-[0.24em] text-[#70706C] leading-snug">
             Progress
           </p>
-          <div className="w-10 h-[1.5px] bg-[#DCDCD7] ml-auto mt-2" />
+          <div className="w-10 h-[1.5px] bg-[#E2E0DD] ml-auto mt-2" />
         </div>
       </div>
 
@@ -83,17 +83,17 @@ export function WhatDrivesUs() {
               onClick={() => setActiveCard(idx)}
               className={`rounded-[24px] p-6 sm:p-7 flex flex-col justify-between transition-all duration-300 cursor-pointer min-h-[360px] sm:min-h-[380px] border ${
                 isActive
-                  ? "bg-[#DFDCAE] border-[#C8C593] shadow-sm"
-                  : "bg-[#ECECE7] hover:bg-[#E7E7E2] border-transparent"
+                  ? "bg-[#351779] border-[#351779] text-white shadow-xl"
+                  : "bg-[#FFFFFF] hover:bg-[#F8F7F5] border-[#E2E0DD] hover:border-[#351779]/30 text-[#080808]"
               }`}
             >
               {/* Card Top: Number & Icon */}
               <div>
                 <div className="flex items-center justify-between">
-                  <span className="text-base font-medium text-[#202020]/75">
+                  <span className={`text-base font-medium ${isActive ? "text-[#FFC400]" : "text-[#080808]/75"}`}>
                     {item.step}
                   </span>
-                  <div className="text-[#202020]">
+                  <div className={isActive ? "text-[#FFC400]" : "text-[#080808]"}>
                     {IconComponent === "venn" ? (
                       <svg
                         viewBox="0 0 24 24"
@@ -114,57 +114,30 @@ export function WhatDrivesUs() {
                 </div>
 
                 {/* Short hairline separator */}
-                <div className="w-9 h-[1px] bg-[#202020]/20 mt-3 mb-5" />
+                <div className={`w-9 h-[1px] mt-3 mb-5 ${isActive ? "bg-white/20" : "bg-[#080808]/15"}`} />
 
                 {/* Title */}
-                <h3 className="text-2xl font-bold tracking-tight text-[#1A1A1A] mb-3">
+                <h3 className={`text-2xl font-bold tracking-tight mb-3 ${isActive ? "text-white" : "text-[#080808]"}`}>
                   {item.title}
                 </h3>
 
                 {/* Description */}
-                <p className="text-xs sm:text-[13px] text-[#404040] leading-relaxed">
+                <p className={`text-xs sm:text-[13px] leading-relaxed ${isActive ? "text-white/80" : "text-[#555555]"}`}>
                   {item.description}
                 </p>
               </div>
 
-              {/* Card Bottom: Licence & Read Toggle */}
+              {/* Card Bottom: Licence */}
               <div className="pt-6">
                 {/* Licence with vertical accent bar */}
-                <div className="border-l-2 border-[#202020]/30 pl-3 mb-5">
-                  <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#70706C] block">
+                <div className={`border-l-2 pl-3 ${isActive ? "border-[#FFC400]/50" : "border-[#080808]/25"}`}>
+                  <span className={`text-[10px] font-bold uppercase tracking-[0.2em] block ${isActive ? "text-white/60" : "text-[#70706C]"}`}>
                     Licence
                   </span>
-                  <span className="text-xs sm:text-[13px] font-semibold text-[#202020]">
+                  <span className={`text-xs sm:text-[13px] font-semibold ${isActive ? "text-white" : "text-[#080808]"}`}>
                     {item.licence}
                   </span>
                 </div>
-
-                {/* Read Button */}
-                <button
-                  type="button"
-                  onClick={(e) => {
-                    e.stopPropagation()
-                    setActiveCard(isActive ? -1 : idx)
-                  }}
-                  className="flex items-center gap-3 text-left group focus:outline-none"
-                >
-                  <span
-                    className={`w-7 h-7 sm:w-8 sm:h-8 rounded-full flex items-center justify-center transition-all duration-200 ${
-                      isActive
-                        ? "bg-[#BDB725] text-[#202020]"
-                        : "bg-[#D8D8D3] group-hover:bg-[#CAC32C] text-[#202020]"
-                    }`}
-                  >
-                    {isActive ? (
-                      <Minus className="w-3.5 h-3.5 stroke-[2.5]" />
-                    ) : (
-                      <Plus className="w-3.5 h-3.5 stroke-[2.5]" />
-                    )}
-                  </span>
-                  <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.2em] text-[#202020]">
-                    {isActive ? "Read less" : "Read more"}
-                  </span>
-                </button>
               </div>
             </div>
           )
@@ -172,11 +145,11 @@ export function WhatDrivesUs() {
       </div>
 
       {/* 3. Section Bottom Bar */}
-      <div className="flex items-center justify-between pt-2 border-t border-[#E7E7E3]">
+      <div className="flex items-center justify-between pt-2 border-t border-[#E2E0DD]">
         {/* Step Indicator */}
         <div className="flex items-center gap-3">
-          <div className="w-8 h-[2px] bg-[#202020]" />
-          <span className="text-xs font-semibold tracking-wider text-[#202020]">
+          <div className="w-8 h-[2px] bg-[#351779]" />
+          <span className="text-xs font-semibold tracking-wider text-[#080808]">
             {activeCard >= 0 ? `0${activeCard + 1}` : "01"} / 03
           </span>
         </div>

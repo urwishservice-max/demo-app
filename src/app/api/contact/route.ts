@@ -1,5 +1,7 @@
 import { NextResponse } from "next/server"
 import { z } from "zod"
+import { getClientIp } from "@/lib/server-utils"
+import { sql } from "@/lib/db"
 
 const contactSchema = z.object({
   fullName: z.string().trim().min(2).max(120),
@@ -15,25 +17,104 @@ const contactSchema = z.object({
   honeypot: z.string().max(0).optional(),
 })
 
+const disposableDomains = new Set([
+  "tempmail.com", "10minutemail.com", "mailinator.com", "yopmail.com", "guerrillamail.com",
+])
+
+// In-memory rate limiter — per-IP, 5 submissions per hour
 const attempts = new Map<string, number[]>()
-const disposableDomains = new Set(["tempmail.com", "10minutemail.com", "mailinator.com", "yopmail.com", "guerrillamail.com"])
 
 export async function POST(request: Request) {
-  const ip = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown"
-  const cutoff = Date.now() - 60 * 60 * 1000
-  const recent = (attempts.get(ip) || []).filter((time) => time > cutoff)
-  if (recent.length >= 5) return NextResponse.json({ message: "Too many submissions. Please try again later." }, { status: 429 })
+  try {
+    // ── Rate limiting ─────────────────────────────────────────────────────────
+    const ip = getClientIp(request)
+    const cutoff = Date.now() - 60 * 60 * 1000
+    const recent = (attempts.get(ip) || []).filter((t) => t > cutoff)
 
-  const parsed = contactSchema.safeParse(await request.json().catch(() => null))
-  if (!parsed.success) return NextResponse.json({ message: "Please check the form and try again." }, { status: 400 })
-  if (parsed.data.honeypot) return NextResponse.json({ ok: true })
-  if (disposableDomains.has(parsed.data.workEmail.split("@")[1].toLowerCase())) return NextResponse.json({ message: "Please use a valid corporate email address." }, { status: 400 })
+    if (recent.length >= 5) {
+      return NextResponse.json(
+        { message: "Too many submissions. Please try again later." },
+        { status: 429 }
+      )
+    }
 
-  attempts.set(ip, [...recent, Date.now()])
-  const endpoint = process.env.CONTACT_DELIVERY_WEBHOOK_URL
-  if (!endpoint) return NextResponse.json({ message: "Enquiry delivery has not yet been configured. Please use the published contact details." }, { status: 503 })
+    // ── Parse & validate ──────────────────────────────────────────────────────
+    const parsed = contactSchema.safeParse(await request.json().catch(() => null))
 
-  const delivery = await fetch(endpoint, { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ ...parsed.data, consentTimestamp: new Date().toISOString(), consentVersion: "2026-08-14" }) })
-  if (!delivery.ok) return NextResponse.json({ message: "We were unable to send your enquiry. Please try again." }, { status: 502 })
-  return NextResponse.json({ ok: true })
+    if (!parsed.success) {
+      return NextResponse.json(
+        { message: "Please check the form and try again." },
+        { status: 400 }
+      )
+    }
+
+    // ── Honeypot ──────────────────────────────────────────────────────────────
+    if (parsed.data.honeypot) {
+      return NextResponse.json({ ok: true })
+    }
+
+    // ── Disposable email check ────────────────────────────────────────────────
+    const domain = parsed.data.workEmail.split("@")[1]?.toLowerCase()
+    if (domain && disposableDomains.has(domain)) {
+      return NextResponse.json(
+        { message: "Please use a valid corporate email address." },
+        { status: 400 }
+      )
+    }
+
+    // ── Record attempt ────────────────────────────────────────────────────────
+    attempts.set(ip, [...recent, Date.now()])
+
+    const consentTimestamp = new Date().toISOString()
+
+    // ── Save to Neon PostgreSQL ───────────────────────────────────────────────
+    await sql`
+      INSERT INTO contact_enquiries (
+        full_name, work_email, phone, organisation, job_title, country,
+        areas_of_interest, enquiry,
+        consent, marketing_opt_in, consent_timestamp, consent_version
+      ) VALUES (
+        ${parsed.data.fullName},
+        ${parsed.data.workEmail},
+        ${parsed.data.phone ?? null},
+        ${parsed.data.organisation},
+        ${parsed.data.jobTitle ?? null},
+        ${parsed.data.country},
+        ${parsed.data.areasOfInterest},
+        ${parsed.data.enquiry},
+        ${parsed.data.consent},
+        ${parsed.data.marketingOptIn ?? false},
+        ${consentTimestamp},
+        ${"2026-08-14"}
+      )
+    `
+
+    // ── Also forward to webhook if configured ─────────────────────────────────
+    const endpoint = process.env.CONTACT_DELIVERY_WEBHOOK_URL
+    if (endpoint) {
+      try {
+        await fetch(endpoint, {
+          method: "POST",
+          headers: { "content-type": "application/json" },
+          body: JSON.stringify({
+            ...parsed.data,
+            consentTimestamp,
+            consentVersion: "2026-08-14",
+          }),
+          signal: AbortSignal.timeout(8000),
+        })
+      } catch (err) {
+        // Webhook failure does NOT fail the request — record is already saved in DB
+        console.error("Contact webhook error (non-fatal):", err)
+      }
+    }
+
+    return NextResponse.json({ ok: true })
+  } catch (error) {
+    console.error("Contact route error:", error)
+    return NextResponse.json(
+      { message: "Internal server error. Please try again later." },
+      { status: 500 }
+    )
+  }
 }

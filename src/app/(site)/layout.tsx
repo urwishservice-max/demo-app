@@ -16,30 +16,47 @@ const inter = Inter({
   subsets: ["latin"],
 });
 
+import { siteConfig, getSiteUrl, isProduction } from "@/lib/site-config";
+
 export const metadata: Metadata = {
-  title: "Acheron | Modern Ideas. Real Impact. | Advisory Consultancy",
-  description:
-    "Acheron is a premier consultancy delivering AI and innovation, strategy and management, people and capability, and project development advisory for UAE organisations.",
+  metadataBase: new URL(getSiteUrl()),
+  title: {
+    default: siteConfig.defaultTitle,
+    template: "%s | Asheron",
+  },
+  description: siteConfig.description,
   alternates: {
-    canonical: "https://acheron.example.com",
+    canonical: "/",
   },
   openGraph: {
-    title: "Acheron | Modern Ideas. Real Impact. | Advisory Consultancy",
-    description: "Acheron is a premier consultancy delivering AI and innovation, strategy and management, people and capability, and project development advisory for UAE organisations.",
-    url: "https://acheron.example.com",
-    siteName: "Acheron Management Consultancies, LLC",
-    locale: "en_AE",
+    title: siteConfig.defaultTitle,
+    description: siteConfig.description,
+    url: getSiteUrl(),
+    siteName: siteConfig.legalName,
+    locale: siteConfig.locale,
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Acheron | Modern Ideas. Real Impact. | Advisory Consultancy",
-    description: "Acheron is a premier consultancy delivering AI and innovation, strategy and management, people and capability, and project development advisory for UAE organisations.",
+    title: siteConfig.defaultTitle,
+    description: siteConfig.description,
   },
-  robots: {
-    index: false,
-    follow: false,
-  },
+  robots: isProduction()
+    ? {
+        index: true,
+        follow: true,
+        googleBot: {
+          index: true,
+          follow: true,
+          "max-video-preview": -1,
+          "max-image-preview": "large",
+          "max-snippet": -1,
+        },
+      }
+    : {
+        index: false,
+        follow: false,
+      },
 };
 
 export default function RootLayout({
@@ -49,7 +66,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${dmSans.variable} ${inter.variable} h-full antialiased`} dir="ltr">
-      <body className="min-h-full flex flex-col bg-[#202020] text-[#202020] selection:bg-[#CAC32C] selection:text-[#202020]">
+      <body className="min-h-full flex flex-col bg-[#F8F7F5] text-[#080808] selection:bg-[#FFC400] selection:text-[#080808]">
         <a href="#main-content" className="skip-link">Skip to content</a>
         <Header />
         <main id="main-content" className="flex-1 flex flex-col">{children}</main>

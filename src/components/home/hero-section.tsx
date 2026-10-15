@@ -40,7 +40,7 @@ export function HeroSection() {
       ref={containerRef}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      className="relative min-h-screen flex flex-col justify-between pt-28 pb-10 px-6 md:px-12 lg:px-16 overflow-hidden bg-[#FAFAF8] text-[#202020] select-none perspective-[1200px]"
+      className="relative min-h-screen flex flex-col justify-between pt-28 pb-10 px-6 md:px-12 lg:px-16 overflow-hidden bg-[#F8F7F5] text-[#080808] select-none perspective-[1200px]"
     >
       {/* ============================================================== */}
       {/* 1. CELESTIAL ORBITAL RING & SATELLITE GOLD DOT                */}
@@ -49,17 +49,17 @@ export function HeroSection() {
         <motion.div
           animate={{ rotate: 360 }}
           transition={{ duration: 75, ease: "linear", repeat: Infinity }}
-          className="relative w-[640px] h-[640px] sm:w-[780px] sm:h-[780px] md:w-[940px] md:h-[940px] rounded-full border border-[#DCDCDC]/85"
+          className="relative w-[640px] h-[640px] sm:w-[780px] sm:h-[780px] md:w-[940px] md:h-[940px] rounded-full border border-[#E2E0DD]"
         >
           {/* Orbital Satellite Gold Dot with soft radiant pulse */}
           <motion.div
-            className="absolute top-[29%] right-[11%] w-3.5 h-3.5 md:w-4 md:h-4 rounded-full bg-[#CAC32C]"
+            className="absolute top-[29%] right-[11%] w-3.5 h-3.5 md:w-4 md:h-4 rounded-full bg-[#FFC400]"
             animate={{
               scale: [1, 1.25, 1],
               boxShadow: [
-                "0 0 10px rgba(202,195,44,0.35)",
-                "0 0 24px rgba(202,195,44,0.75)",
-                "0 0 10px rgba(202,195,44,0.35)",
+                "0 0 12px rgba(255,196,0,0.45)",
+                "0 0 26px rgba(255,196,0,0.85)",
+                "0 0 12px rgba(255,196,0,0.45)",
               ],
             }}
             transition={{ duration: 3.2, repeat: Infinity, ease: "easeInOut" }}
@@ -68,7 +68,7 @@ export function HeroSection() {
       </div>
 
       {/* Ambient delicate warm light aura behind center emblem */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[520px] h-[520px] bg-[radial-gradient(circle_at_center,rgba(202,195,44,0.12),transparent_70%)] pointer-events-none blur-3xl z-0" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[560px] h-[560px] bg-[radial-gradient(circle_at_center,rgba(53,23,121,0.08),rgba(255,196,0,0.07),transparent_70%)] pointer-events-none blur-3xl z-0" />
 
       {/* ============================================================== */}
       {/* 2. LEFT SIDE STACKED ACCENTS (TECHNOLOGY · PEOPLE · PROGRESS)  */}
@@ -109,7 +109,7 @@ export function HeroSection() {
           animate={{ scaleX: 1 }}
           transition={{ duration: 0.8, delay: 1.1, ease: [0.16, 1, 0.3, 1] }}
           style={{ originX: 0 }}
-          className="w-8 h-[1px] bg-[#CAC32C] mt-4"
+          className="w-8 h-[1px] bg-[#FFC400] mt-4"
         />
       </div>
 
@@ -122,7 +122,7 @@ export function HeroSection() {
         transition={{ duration: 1, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
         className="hidden lg:flex flex-col items-center z-10 absolute right-10 md:right-14 xl:right-20 top-1/2 -translate-y-1/2"
       >
-        <span className="text-xs font-bold tracking-widest text-[#202020]">01</span>
+        <span className="text-xs font-bold tracking-widest text-[#080808]">01</span>
         
         {/* Growing indicator stroke */}
         <motion.div
@@ -130,14 +130,14 @@ export function HeroSection() {
           animate={{ scaleY: 1 }}
           transition={{ duration: 0.8, delay: 0.9, ease: [0.16, 1, 0.3, 1] }}
           style={{ originY: 0 }}
-          className="h-6 w-[1.5px] bg-[#202020] my-2"
+          className="h-6 w-[1.5px] bg-[#351779] my-2"
         />
 
         <div className="flex flex-col items-center gap-2 text-xs text-[#B5B5B5] tracking-widest font-light">
           {["02", "03", "04", "05"].map((num) => (
             <span
               key={num}
-              className="hover:text-[#202020] transition-colors duration-200 cursor-pointer"
+              className="hover:text-[#351779] transition-colors duration-200 cursor-pointer"
             >
               {num}
             </span>
@@ -181,11 +181,11 @@ export function HeroSection() {
             {/* Base Logo Image */}
             <Image
               src="/ashron.png"
-              alt="Acheron Logo"
+              alt="Asheron Logo"
               fill
               priority
               sizes="(max-width: 640px) 192px, (max-width: 768px) 240px, (max-width: 1024px) 288px, 320px"
-              className="object-contain drop-shadow-[0_12px_32px_rgba(202,195,44,0.18)]"
+              className="object-contain drop-shadow-[0_12px_32px_rgba(53,23,121,0.18)]"
             />
 
             {/* Specular Traveling Light Sweep / Shimmer */}
@@ -214,9 +214,9 @@ export function HeroSection() {
           initial={{ opacity: 0, y: 24, letterSpacing: "0.22em" }}
           animate={{ opacity: 1, y: 0, letterSpacing: "0.38em" }}
           transition={{ duration: 1.1, delay: 0.45, ease: [0.16, 1, 0.3, 1] }}
-          className="mt-8 text-3xl sm:text-4xl md:text-[44px] lg:text-[50px] font-normal tracking-[0.38em] text-[#202020] uppercase select-none leading-none"
+          className="mt-8 text-3xl sm:text-4xl md:text-[44px] lg:text-[50px] font-normal tracking-[0.38em] text-[#080808] uppercase select-none leading-none"
         >
-          A C H E R O N
+          A S H E R O N
         </motion.h1>
 
         {/* Subtitle */}
@@ -234,7 +234,7 @@ export function HeroSection() {
           initial={{ scaleX: 0 }}
           animate={{ scaleX: 1 }}
           transition={{ duration: 0.7, delay: 0.85, ease: [0.16, 1, 0.3, 1] }}
-          className="w-10 h-[1.5px] bg-[#202020] my-6"
+          className="w-10 h-[1.5px] bg-[#351779] my-6"
         />
 
         {/* Tagline */}
@@ -258,7 +258,7 @@ export function HeroSection() {
         className="flex items-end justify-between w-full z-10 mt-auto pt-6 select-none"
       >
         {/* Bottom Left Annotation */}
-        <div className="flex items-center border-l-2 border-[#202020] pl-3 py-0.5">
+        <div className="flex items-center border-l-2 border-[#351779] pl-3 py-0.5">
           <div className="text-[9px] sm:text-[10px] md:text-[11px] tracking-[0.22em] text-[#6B6B6B] uppercase font-medium leading-relaxed">
             <p>Dubai, United Arab Emirates</p>
             <p>Licensed Advisory</p>
@@ -268,7 +268,7 @@ export function HeroSection() {
         {/* Bottom Right Scroll Down with bouncing arrow cue */}
         <a
           href="#what-got-you-here"
-          className="group inline-flex items-center gap-2 text-[10px] sm:text-[11px] md:text-xs tracking-[0.28em] font-medium text-[#202020] uppercase transition-colors hover:text-[#CAC32C]"
+          className="group inline-flex items-center gap-2 text-[10px] sm:text-[11px] md:text-xs tracking-[0.28em] font-medium text-[#080808] uppercase transition-colors hover:text-[#FFC400]"
         >
           <span>SCROLL</span>
           <motion.span

@@ -95,11 +95,11 @@ function IntroSlide({ progress }: { progress: MotionValue<number> }) {
         {/* Centered Heading */}
         <h2 className="text-3xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-white uppercase leading-[1.08] mb-4">
           How We Are <br />
-          <span className="text-[#D4B924]">Different.</span>
+          <span className="text-[#FFC400]">Different.</span>
         </h2>
 
         {/* Elegant Accent Underline under the text */}
-        <div className="w-16 h-[2px] bg-[#D4B924] mb-6" />
+        <div className="w-16 h-[2px] bg-[#FFC400] mb-6" />
 
         {/* diffrent.png full uncropped image placed under the text */}
         <div className="w-full max-w-xl sm:max-w-2xl lg:max-w-3xl mx-auto">
@@ -190,7 +190,7 @@ function DistinctionSlide({
       <div className="w-full max-w-lg lg:max-w-xl xl:max-w-2xl text-left px-2 sm:px-4">
         {/* Subtle Category Line */}
         <div className="flex items-center gap-4 mb-4 sm:mb-6">
-          <span className="text-3xl sm:text-4xl font-mono font-bold text-[#D4B924]">
+          <span className="text-3xl sm:text-4xl font-mono font-bold text-[#FFC400]">
             {item.number}
           </span>
           <div className="h-4 w-[1px] bg-white/20" />
@@ -201,7 +201,7 @@ function DistinctionSlide({
 
         {/* Subtitle & Main Title */}
         <div className="mb-4 sm:mb-6">
-          <span className="text-xs font-mono uppercase tracking-widest text-[#D4B924]/80 block mb-1 sm:mb-2">
+          <span className="text-xs font-mono uppercase tracking-widest text-[#FFC400]/80 block mb-1 sm:mb-2">
             {item.subtitle}
           </span>
           <h3 className="text-2xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold text-white uppercase tracking-tight leading-[1.1]">
@@ -226,7 +226,7 @@ function DistinctionSlide({
               key={hIdx}
               className="flex items-center gap-2.5 text-xs sm:text-sm text-white/70"
             >
-              <span className="w-1.5 h-1.5 rounded-full bg-[#D4B924] flex-shrink-0" />
+              <span className="w-1.5 h-1.5 rounded-full bg-[#FFC400] flex-shrink-0" />
               <span>{highlight}</span>
             </div>
           ))}
@@ -373,12 +373,12 @@ export function HowWeAreDifferent() {
         
         {/* Extremely Subtle Ambient Glow */}
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(#ffffff05_1px,transparent_1px)] [background-size:32px_32px] opacity-40" />
-        <div className="pointer-events-none absolute top-1/3 left-1/4 w-[500px] h-[500px] bg-[#D4B924]/5 rounded-full blur-[160px]" />
+        <div className="pointer-events-none absolute top-1/3 left-1/4 w-[500px] h-[500px] bg-[#FFC400]/5 rounded-full blur-[160px]" />
 
         {/* Minimal Corner Step Counter (only shown during the 4 distinction slides) */}
         <div className="relative z-30 flex items-center justify-end w-full max-w-7xl mx-auto h-6">
           {activeStep > 0 && (
-            <span className="text-[11px] font-mono tracking-widest text-[#D4B924] transition-opacity duration-300">
+            <span className="text-[11px] font-mono tracking-widest text-[#FFC400] transition-opacity duration-300">
               0{activeStep} / 04
             </span>
           )}

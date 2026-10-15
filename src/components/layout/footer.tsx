@@ -27,7 +27,7 @@ export function Footer() {
   ]
 
   const company = [
-    { name: "About Acheron", href: "/about" },
+    { name: "About Asheron", href: "/about" },
     { name: "Our Approach", href: "/approach" },
     { name: "Advisory Insights", href: "/insights" },
     { name: "Contact & Inquiries", href: "/contact" },
@@ -43,13 +43,13 @@ export function Footer() {
           {/* 1. Atmospheric Warm Bronze / Gold Glow Background */}
           <div className="absolute inset-0 pointer-events-none">
             {/* Ambient Radial Spotlight */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] sm:w-[900px] h-[500px] sm:h-[600px] bg-radial from-[#CAC32C]/25 via-[#B58A22]/15 to-transparent blur-3xl opacity-80" />
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] sm:w-[900px] h-[500px] sm:h-[600px] bg-radial from-[#FFC400]/20 via-[#351779]/25 to-transparent blur-3xl opacity-80" />
             
             {/* Architectural Shadow Silhouette Depth Overlay */}
             <div className="absolute inset-0 opacity-15 mix-blend-screen overflow-hidden">
               <Image
                 src="/practice_ai.jpg"
-                alt="Acheron Background Aesthetic"
+                alt="Asheron Background Aesthetic"
                 fill
                 className="object-cover object-center filter grayscale contrast-125"
                 sizes="(max-width: 1280px) 100vw, 1200px"
@@ -62,9 +62,9 @@ export function Footer() {
           <div className="relative z-20 flex items-center justify-between px-6 sm:px-10 py-6 border-b border-white/10">
             <Link
               href="/"
-              className="text-xl sm:text-2xl font-bold tracking-tight lowercase text-white hover:text-[#CAC32C] transition-colors"
+              className="text-xl sm:text-2xl font-bold tracking-tight lowercase text-white hover:text-[#FFC400] transition-colors"
             >
-              acheron
+              asheron
             </Link>
 
             <div className="flex items-center gap-4">
@@ -75,8 +75,8 @@ export function Footer() {
                 href="https://linkedin.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex h-8 w-8 items-center justify-center rounded-full border border-white/15 text-white/70 transition-colors hover:border-[#CAC32C] hover:text-[#CAC32C]"
-                aria-label="Acheron on LinkedIn"
+                className="flex h-8 w-8 items-center justify-center rounded-full border border-white/15 text-white/70 transition-colors hover:border-[#FFC400] hover:text-[#FFC400]"
+                aria-label="Asheron on LinkedIn"
               >
                 <ArrowUpRight className="h-3.5 w-3.5" />
               </a>
@@ -99,10 +99,10 @@ export function Footer() {
             {/* Right Main Grid Area (11 Cols on desktop, 12 on mobile) */}
             <div className="col-span-12 md:col-span-11 flex flex-col justify-between">
               
-              {/* Row 1: Massive Display Typography 'acheron' (Matching 'dance' in reference) */}
+              {/* Row 1: Massive Display Typography 'asheron' (Matching 'dance' in reference) */}
               <div className="relative border-b border-white/10 py-8 sm:py-12 px-6 sm:px-12 flex items-center justify-center overflow-hidden">
                 <h2 className="text-6xl sm:text-8xl md:text-9xl lg:text-[130px] font-black tracking-[-0.04em] text-white/95 lowercase select-none drop-shadow-2xl">
-                  acheron
+                  asheron
                 </h2>
 
                 {/* Fine Wireframe Vertical Guidelines */}
@@ -116,7 +116,7 @@ export function Footer() {
                 <div className="p-6 sm:p-8 flex flex-col justify-between hover:bg-white/[0.02] transition-colors">
                   <div>
                     <div className="flex items-center justify-between mb-4">
-                      <span className="text-[11px] font-mono tracking-widest text-[#CAC32C] uppercase font-bold">
+                      <span className="text-[11px] font-mono tracking-widest text-[#FFC400] uppercase font-bold">
                         Practices
                       </span>
                       <span className="text-[10px] font-mono text-white/40">01</span>
@@ -126,9 +126,9 @@ export function Footer() {
                         <li key={item.name}>
                           <Link
                             href={item.href}
-                            className="group inline-flex items-center gap-2 text-sm text-white/80 hover:text-[#CAC32C] transition-colors"
+                            className="group inline-flex items-center gap-2 text-sm text-white/80 hover:text-[#FFC400] transition-colors"
                           >
-                            <ArrowUpRight className="h-3.5 w-3.5 text-white/30 group-hover:text-[#CAC32C] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                            <ArrowUpRight className="h-3.5 w-3.5 text-white/30 group-hover:text-[#FFC400] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                             <span>{item.name}</span>
                           </Link>
                         </li>
@@ -156,9 +156,9 @@ export function Footer() {
                         <li key={item.name}>
                           <Link
                             href={item.href}
-                            className="group inline-flex items-center gap-2 text-sm text-white/80 hover:text-[#CAC32C] transition-colors"
+                            className="group inline-flex items-center gap-2 text-sm text-white/80 hover:text-[#FFC400] transition-colors"
                           >
-                            <ArrowUpRight className="h-3.5 w-3.5 text-white/30 group-hover:text-[#CAC32C] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                            <ArrowUpRight className="h-3.5 w-3.5 text-white/30 group-hover:text-[#FFC400] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                             <span>{item.name}</span>
                           </Link>
                         </li>
@@ -186,9 +186,9 @@ export function Footer() {
                         <li key={item.name}>
                           <Link
                             href={item.href}
-                            className="group inline-flex items-center gap-2 text-sm text-white/80 hover:text-[#CAC32C] transition-colors"
+                            className="group inline-flex items-center gap-2 text-sm text-white/80 hover:text-[#FFC400] transition-colors"
                           >
-                            <ArrowUpRight className="h-3.5 w-3.5 text-white/30 group-hover:text-[#CAC32C] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                            <ArrowUpRight className="h-3.5 w-3.5 text-white/30 group-hover:text-[#FFC400] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                             <span>{item.name}</span>
                           </Link>
                         </li>
@@ -206,7 +206,7 @@ export function Footer() {
                 <div className="p-6 sm:p-8 flex flex-col justify-between bg-black/20">
                   <div>
                     <div className="flex items-center justify-between mb-3">
-                      <span className="text-[11px] font-mono tracking-widest text-[#CAC32C] uppercase font-bold">
+                      <span className="text-[11px] font-mono tracking-widest text-[#FFC400] uppercase font-bold">
                         Engagement
                       </span>
                       <span className="text-[10px] font-mono text-white/40">04</span>
@@ -225,7 +225,7 @@ export function Footer() {
                     <div className="relative w-full h-24 rounded-xl overflow-hidden border border-white/15 mb-4">
                       <Image
                         src="/practice_strategy.jpg"
-                        alt="Acheron Strategy Visual"
+                        alt="Asheron Strategy Visual"
                         fill
                         className="object-cover object-center filter brightness-90"
                         sizes="(max-width: 768px) 100vw, 240px"
@@ -233,17 +233,17 @@ export function Footer() {
                       <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex items-end p-2.5">
                         <span className="text-[10px] font-mono text-white/90 uppercase tracking-wider flex items-center justify-between w-full">
                           <span>Executive Mandate</span>
-                          <ArrowRight className="w-3 h-3 text-[#CAC32C]" />
+                          <ArrowRight className="w-3 h-3 text-[#FFC400]" />
                         </span>
                       </div>
                     </div>
 
                     <Link
                       href="/contact"
-                      className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-full bg-[#CAC32C] hover:bg-[#B5AE22] text-[#202020] font-semibold text-xs transition-all shadow-sm active:scale-95"
+                      className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-full bg-[#351779] hover:bg-[#2B1263] text-white font-semibold text-xs transition-all shadow-md active:scale-95 border border-[#351779]"
                     >
                       <span>Thirty minutes, no deck</span>
-                      <ArrowRight className="w-3.5 h-3.5" />
+                      <ArrowRight className="w-3.5 h-3.5 text-[#FFC400]" />
                     </Link>
                   </div>
                 </div>
@@ -267,7 +267,7 @@ export function Footer() {
                   <div className="flex items-center">
                     <div className="w-4 h-[1.5px] bg-white/20" />
                     <div className="w-3 h-3 rounded-full border border-white/40 flex items-center justify-center">
-                      <div className="w-1 h-1 rounded-full bg-[#CAC32C]" />
+                      <div className="w-1 h-1 rounded-full bg-[#FFC400]" />
                     </div>
                     <div className="w-4 h-[1.5px] bg-white/20" />
                   </div>
@@ -277,20 +277,30 @@ export function Footer() {
             </div>
           </div>
 
-          {/* 4. Complete Original Legal & Regulatory Bar */}
-          <div className="relative z-20 flex flex-col lg:flex-row items-start lg:items-center justify-between px-6 sm:px-10 py-5 bg-[#10100F] border-t border-white/10 text-xs text-white/40 gap-4">
-            <div className="flex flex-col sm:flex-row flex-wrap items-start sm:items-center gap-3 sm:gap-6">
-              <span>&copy; {currentYear} Acheron Management Consultancies, LLC.</span>
-              <div className="flex items-center gap-4">
-                <Link href="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link>
-                <Link href="/cookies" className="hover:text-white transition-colors">Cookies</Link>
-                <CookiePreferencesLink />
-                <Link href="/terms" className="hover:text-white transition-colors">Terms of Use</Link>
+          {/* 4. Complete Legal & Regulatory Bar (§3 & §7.2 Compliance) */}
+          <div className="relative z-20 flex flex-col px-6 sm:px-10 py-6 bg-[#10100F] border-t border-white/10 text-xs text-white/40 gap-4">
+            <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4">
+              <div className="flex flex-col sm:flex-row flex-wrap items-start sm:items-center gap-3 sm:gap-6">
+                <span>&copy; {currentYear} Asheron Management Consultancies, LLC. All rights reserved.</span>
+                <div className="flex items-center gap-4">
+                  <Link href="/privacy" className="hover:text-white transition-colors">Privacy Notice</Link>
+                  <span className="text-white/20">&middot;</span>
+                  <Link href="/cookies" className="hover:text-white transition-colors">Cookie Notice</Link>
+                  <span className="text-white/20">&middot;</span>
+                  <CookiePreferencesLink />
+                  <span className="text-white/20">&middot;</span>
+                  <Link href="/terms" className="hover:text-white transition-colors">Terms of Use</Link>
+                </div>
+              </div>
+              <div>
+                <span className="font-mono text-[11px] text-white/60">Licensed activities: 7020039 &middot; 7020003 &middot; 7020008 &middot; 7020020</span>
               </div>
             </div>
-            <div>
-              <span>Licensed UAE Activities: 7020039 &middot; 7020003 &middot; 7020008 &middot; 7020020</span>
-            </div>
+
+            {/* Required standing disclaimer (§7.2) */}
+            <p className="text-[11px] leading-relaxed text-white/40 pt-3 border-t border-white/5">
+              Asheron Management Consultancies, LLC provides management, strategy, capability, project, and innovation advisory services. Content on this website is general information only and does not constitute legal, regulatory, audit, tax, or investment advice. No advisory relationship is created by use of this website.
+            </p>
           </div>
 
         </div>

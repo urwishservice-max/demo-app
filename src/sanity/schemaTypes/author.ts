@@ -28,6 +28,20 @@ export const authorType = defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
+      name: 'order',
+      title: 'Display Order',
+      type: 'number',
+      description: 'Used to sort leadership members (e.g. 1 for Managing Partner, 2, 3...)',
+      validation: (Rule) => Rule.positive().integer(),
+    }),
+    defineField({
+      name: 'isLeadership',
+      title: 'Display on Leadership Section',
+      type: 'boolean',
+      initialValue: true,
+      description: 'Enable to feature this person in the Leadership section on the About page.',
+    }),
+    defineField({
       name: 'image',
       title: 'Professional Photograph',
       type: 'image',
@@ -42,8 +56,24 @@ export const authorType = defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
+      name: 'email',
+      title: 'Email Address',
+      type: 'string',
+      validation: (Rule) => Rule.email().error('Please enter a valid email address'),
+    }),
+    defineField({
       name: 'linkedinUrl',
       title: 'LinkedIn URL',
+      type: 'url',
+    }),
+    defineField({
+      name: 'twitterUrl',
+      title: 'X / Twitter Profile URL',
+      type: 'url',
+    }),
+    defineField({
+      name: 'websiteUrl',
+      title: 'Website / Portfolio URL',
       type: 'url',
     }),
   ],
@@ -52,6 +82,16 @@ export const authorType = defineType({
       title: 'name',
       subtitle: 'title',
       media: 'image',
+      order: 'order',
+    },
+    prepare(selection) {
+      const { title, subtitle, media, order } = selection
+      return {
+        title,
+        subtitle: order !== undefined ? `#${order} · ${subtitle || ''}` : subtitle,
+        media,
+      }
     },
   },
 })
+

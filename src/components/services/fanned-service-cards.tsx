@@ -523,7 +523,7 @@ export function FannedServiceCards() {
               <X className="w-4 h-4" />
             </button>
 
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#CAC32C]/15 text-[#CAC32C] text-xs font-mono uppercase mb-4">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#FFC400]/15 text-[#FFC400] text-xs font-mono uppercase mb-4">
               <span>{selectedCard.volume}</span>
               <span>&bull;</span>
               <span>{selectedCard.category}</span>
@@ -544,7 +544,7 @@ export function FannedServiceCards() {
               <ul className="space-y-2">
                 {selectedCard.bullets.map((bullet, i) => (
                   <li key={i} className="flex items-start gap-2.5 text-xs sm:text-sm text-neutral-200">
-                    <Check className="w-4 h-4 text-[#CAC32C] mt-0.5 flex-shrink-0" />
+                    <Check className="w-4 h-4 text-[#FFC400] mt-0.5 flex-shrink-0" />
                     <span>{bullet}</span>
                   </li>
                 ))}
@@ -555,7 +555,7 @@ export function FannedServiceCards() {
               <span className="font-mono text-neutral-400">{selectedCard.footerTag}</span>
               <button
                 onClick={() => setSelectedCard(null)}
-                className="px-4 py-2 rounded-lg bg-[#CAC32C] text-[#0F172A] font-semibold text-xs tracking-wide uppercase hover:bg-[#B5AE22] transition-colors"
+                className="px-4 py-2 rounded-lg bg-[#351779] text-white font-semibold text-xs tracking-wide uppercase hover:bg-[#2B1263] transition-colors"
               >
                 Close Inspection
               </button>

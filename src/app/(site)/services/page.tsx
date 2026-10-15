@@ -76,30 +76,30 @@ const practices = [
 
 export default function ServicesHubPage() {
   return (
-    <div className="flex flex-col bg-white text-[#1A1A1A]">
+    <div className="flex flex-col bg-[#F8F7F5] text-[#080808]">
       {/* HEADER */}
-      <section className="bg-white text-[#111111] pt-28 pb-16 sm:pt-32 sm:pb-24 border-b border-[#E7E7E3]">
+      <section className="bg-[#F8F7F5] text-[#080808] pt-28 pb-16 sm:pt-32 sm:pb-24 border-b border-[#E2E0DD]">
         <div className="container mx-auto px-6 max-w-7xl">
           <div className="max-w-4xl">
             <div className="flex items-center gap-2.5 mb-6 sm:mb-8">
-              <span className="h-2 w-2 rounded-full bg-[#CAC32C] flex-shrink-0" />
-              <span className="text-xs sm:text-sm font-bold uppercase tracking-[0.24em] text-[#1A1A1A]">
+              <span className="h-2 w-2 rounded-full bg-[#FFC400] flex-shrink-0" />
+              <span className="text-xs sm:text-sm font-bold uppercase tracking-[0.24em] text-[#080808]">
                 Licensed Advisory Practices
               </span>
             </div>
 
-            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-[68px] font-bold leading-[1.08] tracking-tight text-[#111111] mb-8">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-[68px] font-bold leading-[1.08] tracking-tight text-[#080808] mb-8">
               What we do.
             </h1>
 
-            <p className="text-lg md:text-xl text-[#3A3A3A] font-light max-w-3xl leading-relaxed mb-10">
+            <p className="text-lg md:text-xl text-[#080808]/70 font-light max-w-3xl leading-relaxed mb-10">
               Four practices, matched to our four licences. Asheron brings strategy, delivery, capability, and responsible innovation together — helping organisations turn priorities into controlled, measurable outcomes.
             </p>
 
             <div className="flex flex-wrap items-center gap-4">
               <Link
                 href="/services/complete-shelf"
-                className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-[#1A1A1A] text-white font-semibold text-xs tracking-wider uppercase hover:bg-[#CAC32C] hover:text-[#1A1A1A] transition-all shadow-sm"
+                className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-[#351779] text-white font-semibold text-xs tracking-wider uppercase hover:bg-[#2B1263] transition-all shadow-sm"
               >
                 <span>Launch 3D AI Practice Shelf</span>
                 <span className="text-sm">&rarr;</span>
@@ -113,43 +113,43 @@ export default function ServicesHubPage() {
       {practices.map((practice, index) => (
         <section 
           key={practice.id} 
-          className={`py-24 ${index % 2 === 0 ? 'bg-white' : 'bg-[#FAFAF8]'}`}
+          className={`py-24 ${index % 2 === 0 ? 'bg-white' : 'bg-[#F8F7F5]'}`}
         >
           <div className="container mx-auto px-6 max-w-7xl">
             <div className={`flex flex-col lg:flex-row gap-16 items-center ${index % 2 !== 0 ? 'lg:flex-row-reverse' : ''}`}>
               
               <div className="flex-1 w-full">
                 <div className="flex items-center gap-2.5 mb-4">
-                  <span className="h-2 w-2 rounded-full bg-[#CAC32C] flex-shrink-0" />
-                  <span className="text-xs font-bold uppercase tracking-[0.22em] text-[#1A1A1A]">
+                  <span className="h-2 w-2 rounded-full bg-[#FFC400] flex-shrink-0" />
+                  <span className="text-xs font-bold uppercase tracking-[0.22em] text-[#080808]">
                     Licence {practice.licence}
                   </span>
                 </div>
 
-                <h2 className="text-3xl md:text-4xl font-semibold mb-6 text-[#1A1A1A]">{practice.name}</h2>
-                <p className="text-lg text-[#6B6B6B] mb-8 leading-relaxed">
+                <h2 className="text-3xl md:text-4xl font-semibold mb-6 text-[#080808]">{practice.name}</h2>
+                <p className="text-lg text-[#080808]/70 mb-8 leading-relaxed">
                   {practice.summary}
                 </p>
                 
                 <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-10">
                   {practice.bullets.map((bullet, i) => (
                     <li key={i} className="flex items-start gap-3">
-                      <div className="w-1.5 h-1.5 rounded-full bg-[#CAC32C] mt-2.5 flex-shrink-0" />
-                      <span className="text-[#4A4A4A]">{bullet}</span>
+                      <div className="w-1.5 h-1.5 rounded-full bg-[#FFC400] mt-2.5 flex-shrink-0" />
+                      <span className="text-[#080808]/80">{bullet}</span>
                     </li>
                   ))}
                 </ul>
                 
                 <Link 
                   href={practice.href} 
-                  className="inline-flex items-center gap-2 text-[#1A1A1A] font-semibold hover:text-[#CAC32C] transition-colors group"
+                  className="inline-flex items-center gap-2 text-[#080808] font-semibold hover:text-[#351779] transition-colors group"
                 >
                   Explore practice <span className="group-hover:translate-x-1 transition-transform">&rarr;</span>
                 </Link>
               </div>
 
               <div className="flex-1 w-full flex justify-center">
-                <div className={`w-full max-w-md aspect-square rounded-2xl relative overflow-hidden border border-[#E7E7E3] shadow-md flex items-center justify-center p-6 ${practice.id === 'strategy' || practice.id === 'people' || practice.id === 'projects' ? 'bg-white' : 'bg-[#FAFAF8]'}`}>
+                <div className={`w-full max-w-md aspect-square rounded-2xl relative overflow-hidden border border-[#E2E0DD] shadow-md flex items-center justify-center p-6 ${practice.id === 'strategy' || practice.id === 'people' || practice.id === 'projects' ? 'bg-white' : 'bg-[#F8F7F5]'}`}>
                   <Image
                     src={practice.image}
                     alt={practice.name}
@@ -166,9 +166,9 @@ export default function ServicesHubPage() {
       ))}
 
       {/* CLOSING */}
-      <section className="py-24 bg-[#FAFAF8] text-[#111111] text-center border-t border-[#E7E7E3]">
+      <section className="py-24 bg-[#F8F7F5] text-[#080808] text-center border-t border-[#E2E0DD]">
         <div className="container mx-auto px-6 max-w-4xl">
-          <p className="text-2xl md:text-3xl font-light leading-relaxed text-[#202020]">
+          <p className="text-2xl md:text-3xl font-light leading-relaxed text-[#080808]">
             Engage each practice independently — or combine them in sequence to move from strategic intent to sustainable operational delivery.
           </p>
         </div>
